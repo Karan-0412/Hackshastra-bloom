@@ -406,32 +406,6 @@ const Profile: React.FC = () => {
         </div>
       </div>
 
-      {/* Pokemon Avatar Picker Modal */}
-      {showAvatarPicker && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
-              <h2 className="text-xl font-semibold">Choose Your Pokemon Avatar</h2>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowAvatarPicker(false)}
-                className="rounded-full"
-              >
-                ✕
-              </Button>
-            </div>
-            <div className="p-6">
-              <PokemonAvatarPicker
-                selected={selectedAvatar}
-                onSelect={handleAvatarSelect}
-                onConfirm={handleAvatarConfirm}
-                onSkip={handleAvatarSkip}
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
