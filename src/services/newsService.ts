@@ -129,13 +129,13 @@ const NEWS_API_CONFIG = {
 
 // News categories for filtering
 export const NEWS_CATEGORIES = [
-  { id: 'all', name: 'All News', icon: '📰' },
-  { id: 'climate', name: 'Climate Change', icon: '🌍' },
-  { id: 'biodiversity', name: 'Biodiversity', icon: '🦋' },
-  { id: 'renewable-energy', name: 'Renewable Energy', icon: '⚡' },
-  { id: 'pollution', name: 'Pollution', icon: '🌫️' },
-  { id: 'conservation', name: 'Conservation', icon: '🌳' },
-  { id: 'sustainability', name: 'Sustainability', icon: '♻️' }
+  { id: 'all', name: 'All News' },
+  { id: 'climate', name: 'Climate Change' },
+  { id: 'biodiversity', name: 'Biodiversity' },
+  { id: 'renewable-energy', name: 'Renewable Energy' },
+  { id: 'pollution', name: 'Pollution' },
+  { id: 'conservation', name: 'Conservation' },
+  { id: 'sustainability', name: 'Sustainability' }
 ];
 
 // Service functions
