@@ -11,6 +11,8 @@ import { useProfile } from '@/hooks/useProfile';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+import { newsService } from '@/services/newsService';
 import CustomEcoTree from '@/components/tree/CustomEcoTree';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import EnvironmentalQuiz from '@/components/quiz/EnvironmentalQuiz';
@@ -310,9 +312,24 @@ const Dashboard: React.FC = () => {
             {/* Right Section - User Actions */}
             <div className="flex items-center space-x-4">
               {/* Calendar Icon */}
-              <div className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-900 cursor-pointer">
-                <Calendar className="w-5 h-5" />
-              </div>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-900 cursor-pointer">
+                    <Calendar className="w-5 h-5" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-72 p-3">
+                  <div className="text-sm font-semibold mb-2">What's special today</div>
+                  <div className="text-xs text-muted-foreground mb-3">{tipOfDay}</div>
+                  <div className="space-y-2">
+                    {specials.length > 0 ? specials.map(s => (
+                      <a key={s.url} href={s.url} target="_blank" rel="noreferrer" className="block text-sm text-slate-700 hover:underline">{s.title}</a>
+                    )) : (
+                      <div className="text-xs text-muted-foreground">No highlights today.</div>
+                    )}
+                  </div>
+                </PopoverContent>
+              </Popover>
               
               {/* User Avatar */}
               <button type="button" onClick={() => setActiveTab('profile')} className="focus:outline-none">
