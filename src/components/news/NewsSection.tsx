@@ -340,8 +340,8 @@ export default function NewsSection({ className }: NewsSectionProps) {
                       </Badge>
                     </div>
                     <div className="absolute top-3 right-3 flex items-center gap-2">
-                      <button className="p-1 rounded bg-white/80 hover:bg-white" onClick={() => { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(article.url)}`, '_blank'); }} aria-label="Share to Twitter">T</button>
-                      <button className="p-1 rounded bg-white/80 hover:bg-white" onClick={() => { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(article.url)}`, '_blank'); }} aria-label="Share to Facebook">F</button>
+                      <button className="p-1 rounded bg-white/80 hover:bg-white" onClick={() => { window.open(`https://www.threads.net/share?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(article.url)}`, '_blank'); }} aria-label="Share to Threads"><Hash className="w-4 h-4 text-slate-700" /></button>
+                      <button className="p-1 rounded bg-white/80 hover:bg-white" onClick={() => { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(article.url)}`, '_blank'); }} aria-label="Share to Facebook"><Facebook className="w-4 h-4 text-slate-700" /></button>
                       <button className="p-1 rounded bg-white/80 hover:bg-white" onClick={() => { navigator.clipboard?.writeText(article.url); alert('Article URL copied to clipboard'); }} aria-label="Copy link">🔗</button>
                     </div>
                   </div>
