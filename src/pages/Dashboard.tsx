@@ -255,15 +255,15 @@ const Dashboard: React.FC = () => {
     <div className="min-h-screen bg-[#F6F7FB] parallax-container">
       {/* Header */}
       <header className="bg-white/95 backdrop-blur-md shadow-
-      xl sticky top-4 z-50 mx-4 rounded-full border border-white/20 navbar-3d navbar-shadow navbar-curved navbar-floating navbar-glass">
+      xl sticky top-4 z-50 mx-4 rounded-3xl border border-white/20 navbar-3d navbar-shadow navbar-curved navbar-floating navbar-glass">
         <div className="w-full px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo Section */}
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+              <div className="w-7 h-7 bg-black rounded-lg flex items-center justify-center">
+                <span className="text-white font-semibold text-[13px] leading-none">E</span>
               </div>
-              <h1 className="text-xl font-semibold text-gray-800">
+              <h1 className="text-[13px] font-medium text-gray-800">
                 EcoEdu Punjab
               </h1>
             </div>
