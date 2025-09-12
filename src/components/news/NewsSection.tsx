@@ -270,7 +270,7 @@ export default function NewsSection({ className }: NewsSectionProps) {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {getPaginatedArticles().map((article) => (
-                <Card key={article.id} className="bg-white border-blue-200 hover:shadow-lg transition-shadow group">
+                <Card key={article.id} className="bg-white border-blue-200 hover:shadow-lg transition-shadow group custom-card">
                   <div className="relative">
                     <img
                       src={article.urlToImage}
@@ -280,23 +280,29 @@ export default function NewsSection({ className }: NewsSectionProps) {
                         e.currentTarget.src = 'https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=800&h=400&fit=crop';
                       }}
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-t-lg" />
                     <div className="absolute top-3 left-3">
-                      <Badge className={getCategoryColor(article.category)}>
+                      <Badge className={`${getCategoryColor(article.category)} !text-xs`}>
                         {getCategoryIcon(article.category)}
-                        <span className="ml-1">{article.category.replace('-', ' ')}</span>
+                        <span className="ml-1 text-xs">{article.category.replace('-', ' ')}</span>
                       </Badge>
                     </div>
+                    <div className="absolute top-3 right-3 flex items-center gap-2">
+                      <button className="p-1 rounded bg-white/80 hover:bg-white" onClick={() => { window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(article.url)}`, '_blank'); }} aria-label="Share to Twitter">T</button>
+                      <button className="p-1 rounded bg-white/80 hover:bg-white" onClick={() => { window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(article.url)}`, '_blank'); }} aria-label="Share to Facebook">F</button>
+                      <button className="p-1 rounded bg-white/80 hover:bg-white" onClick={() => { navigator.clipboard?.writeText(article.url); alert('Article URL copied to clipboard'); }} aria-label="Copy link">🔗</button>
+                    </div>
                   </div>
-                  
+
                   <CardHeader>
-                    <CardTitle className="text-lg font-semibold text-blue-900 line-clamp-2 group-hover:text-blue-700 transition-colors">
+                    <CardTitle className="text-lg custom-heading text-slate-900 line-clamp-2 group-hover:text-slate-700 transition-colors">
                       {article.title}
                     </CardTitle>
-                    <p className="text-sm text-gray-600 line-clamp-3">
+                    <p className="text-sm custom-body text-slate-600 line-clamp-3">
                       {article.description}
                     </p>
                   </CardHeader>
-                  
+
                   <CardContent>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between text-xs text-gray-500">
@@ -306,21 +312,32 @@ export default function NewsSection({ className }: NewsSectionProps) {
                         </span>
                         <span>{formatDate(article.publishedAt)}</span>
                       </div>
-                      
+
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-gray-500">
                           {article.source.name}
                         </span>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => window.open(article.url, '_blank')}
-                          className="text-xs"
-                        >
-                          <ExternalLink className="w-3 h-3 mr-1" />
-                          Read More
-                        </Button>
+                        <div className="flex items-center gap-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => window.open(article.url, '_blank')}
+                            className="text-xs"
+                          >
+                            <ExternalLink className="w-3 h-3 mr-1" />
+                            Read
+                          </Button>
+                          <Button size="sm" variant="ghost" onClick={() => {
+                            // toggle comments below per article
+                            const key = `comments_${article.id}`;
+                            const raw = localStorage.getItem('news_comments_v1');
+                          }} className="text-xs">Comments</Button>
+                        </div>
                       </div>
+
+                      {/* Simple comments area */}
+                      <ArticleComments articleId={article.id} />
+
                     </div>
                   </CardContent>
                 </Card>
