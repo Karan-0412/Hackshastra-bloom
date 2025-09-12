@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useProfile } from '@/hooks/useProfile';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Search, Plus, UserPlus, ChevronRight, Edit3, Save, X } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import PokemonAvatarPicker from '@/components/auth/PokemonAvatarPicker';
 import CreatePost from '@/components/community/CreatePost';
 
 const StatPill: React.FC<{ label: string; value: string }> = ({ label, value }) => (
@@ -51,6 +52,49 @@ const Profile: React.FC = () => {
   const [showAvatarPicker, setShowAvatarPicker] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(profile?.pokemon_avatar || null);
   const [isUpdating, setIsUpdating] = useState(false);
+
+  // Cover / upload state
+  const [localCoverUrl, setLocalCoverUrl] = useState<string | undefined>(undefined);
+  const [uploading, setUploading] = useState(false);
+
+  // Sync local edit state when profile changes
+  useEffect(() => {
+    setEditName(profile?.full_name || '');
+    setSelectedAvatar(profile?.pokemon_avatar || null);
+  }, [profile]);
+
+  const handleEditClick = () => {
+    setEditName(profile?.full_name || '');
+    setSelectedAvatar(profile?.pokemon_avatar || null);
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setEditName(profile?.full_name || '');
+    setSelectedAvatar(profile?.pokemon_avatar || null);
+  };
+
+  const handleSaveProfile = async () => {
+    if (!profile) return;
+    setIsUpdating(true);
+    try {
+      const updates: any = { full_name: editName };
+      if (selectedAvatar) updates.pokemon_avatar = selectedAvatar;
+      const res = await updateProfile(updates);
+      if ((res as any)?.error) {
+        toast({ title: 'Failed to update profile', variant: 'destructive' });
+      } else {
+        toast({ title: 'Profile updated' });
+        setIsEditing(false);
+      }
+    } catch (err) {
+      console.error('Error saving profile:', err);
+      toast({ title: 'Failed to update profile', variant: 'destructive' });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
   const handleCoverChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
