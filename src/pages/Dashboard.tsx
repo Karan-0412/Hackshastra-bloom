@@ -102,6 +102,30 @@ const ActivityBars: React.FC = () => {
 
 const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [specials, setSpecials] = useState<{ title: string; url: string }[]>([]);
+  const [tipOfDay, setTipOfDay] = useState('');
+
+  useEffect(() => {
+    // Load a few trending articles to show as highlights
+    (async () => {
+      try {
+        const t = await newsService.getTrendingNews(3);
+        setSpecials(t.map(a => ({ title: a.title, url: a.url })));
+      } catch (e) { setSpecials([]); }
+    })();
+
+    // Simple tip of the day
+    const tips = [
+      'Take a short walk and pick up any litter you find.',
+      'Plant a native tree or shrub in your community.',
+      'Reduce single-use plastics today: bring a reusable bottle.',
+      'Support local conservation groups — volunteer or donate.',
+      'Learn about composting and start a small compost bin.',
+      'Switch off unused lights and save energy tonight.',
+      'Share an environmental article with a friend.'
+    ];
+    setTipOfDay(tips[new Date().getDay()] || tips[0]);
+  }, []);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [selectedModule, setSelectedModule] = useState<QuizModule | null>(null);
   const [showQuiz, setShowQuiz] = useState(false);
