@@ -255,7 +255,7 @@ const Dashboard: React.FC = () => {
     <div className="min-h-screen bg-[#F6F7FB] parallax-container">
       {/* Header */}
       <header className="bg-white/95 backdrop-blur-md shadow-
-      xl sticky top-4 z-50 mx-4 rounded-2xl border border-white/20 navbar-3d navbar-shadow navbar-curved navbar-floating navbar-glass">
+      xl sticky top-4 z-50 mx-4 rounded-full border border-white/20 navbar-3d navbar-shadow navbar-curved navbar-floating navbar-glass">
         <div className="w-full px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo Section */}
