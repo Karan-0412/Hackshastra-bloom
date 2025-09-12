@@ -302,12 +302,6 @@ const Dashboard: React.FC = () => {
                   >
                     News
                   </TabsTrigger>
-                  <TabsTrigger 
-                    value="profile" 
-                    className="data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
-                  >
-                    Profile
-                  </TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
