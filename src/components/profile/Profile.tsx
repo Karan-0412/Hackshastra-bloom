@@ -179,10 +179,10 @@ const Profile: React.FC = () => {
               <Card className="rounded-3xl bg-white/90">
                 <CardContent className="p-6">
                   <div className="text-sm mb-3">Linked accounts</div>
-                  <div className="flex items-center gap-3">
-                    <Button variant="outline" className="rounded-full">Twitter</Button>
-                    <Button variant="outline" className="rounded-full">Dribbble</Button>
-                    <Button variant="outline" className="rounded-full">Behance</Button>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button variant="outline" className="rounded-full whitespace-nowrap text-xs">Twitter</Button>
+                    <Button variant="outline" className="rounded-full whitespace-nowrap text-xs">Dribbble</Button>
+                    <Button variant="outline" className="rounded-full whitespace-nowrap text-xs">Behance</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -198,11 +198,11 @@ const Profile: React.FC = () => {
                     className="h-64 bg-cover bg-center"
                     style={{ backgroundImage: `url(${localCoverUrl || (profile as any)?.coverImage || '/placeholder.svg'})` }}
                   />
+                  <label className="absolute inset-0 cursor-pointer">
+                    <input type="file" accept="image/*" className="absolute inset-0 opacity-0 cursor-pointer" onChange={handleCoverChange} />
+                  </label>
                   <div className="absolute top-3 right-3">
-                    <label>
-                      <input type="file" accept="image/*" className="hidden" onChange={handleCoverChange} />
-                      <Button size="sm" variant="secondary" disabled={uploading}>{uploading ? 'Uploading…' : 'Change cover'}</Button>
-                    </label>
+                    <span className="rounded-full bg-white/80 backdrop-blur px-3 py-1 text-xs text-slate-700 border shadow-sm">{uploading ? 'Uploading…' : 'Change cover'}</span>
                   </div>
                   <div className="absolute -bottom-6 left-5 flex items-center gap-2">
                     <Avatar className="h-14 w-14 ring-4 ring-white">
@@ -213,12 +213,11 @@ const Profile: React.FC = () => {
                 </div>
                 <div className="p-5 pt-8">
                   <div className="text-xs text-slate-500 mb-1">Popular this week</div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-start">
                     <div>
                       <div className="font-semibold">{name}</div>
                       <div className="text-xs text-slate-500">230,647</div>
                     </div>
-                    <Button className="rounded-full bg-indigo-500 hover:bg-indigo-600">Follow</Button>
                   </div>
                 </div>
               </CardContent>
