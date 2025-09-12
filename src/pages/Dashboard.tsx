@@ -4,7 +4,7 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, Monitor, MessageSquare, PlayCircle, Video, LogOut } from 'lucide-react';
+import { Calendar, Monitor, MessageSquare, PlayCircle, Video, LogOut, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Gift, Flame, Leaf } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
@@ -274,31 +274,31 @@ const Dashboard: React.FC = () => {
                 <TabsList className="bg-slate-100/80 border rounded-full p-1 shadow-inner backdrop-blur supports-[backdrop-filter]:bg-slate-100/60 [&>button]:rounded-none [&>button]:first:rounded-l-full [&>button]:last:rounded-r-full [&>button]:not(:first-child):not(:last-child):rounded-none">
                   <TabsTrigger 
                     value="dashboard" 
-                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Dashboard
                   </TabsTrigger>
                   <TabsTrigger 
                     value="lessons" 
-                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Lessons
                   </TabsTrigger>
                   <TabsTrigger 
                     value="challenges" 
-                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Challenges
                   </TabsTrigger>
                   <TabsTrigger 
                     value="community" 
-                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Community
                   </TabsTrigger>
                   <TabsTrigger 
                     value="news" 
-                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     News
                   </TabsTrigger>
@@ -326,18 +326,18 @@ const Dashboard: React.FC = () => {
                 onClick={handleSignOut}
                 variant="outline"
                 size="sm"
-                className="text-red-500 border-red-200 hover:bg-red-50 hover:border-red-300 rounded-full px-4 py-2"
+                className="rounded-full border-2 border-red-300 text-red-600 hover:bg-red-50 px-4 py-2"
                 disabled={isSigningOut}
               >
                 {isSigningOut ? (
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
-                    <span>Logging out...</span>
+                    <span className="text-[13px]">Logging out...</span>
                   </div>
                 ) : (
-                  <div className="flex items-center space-x-2">
-                    <LogOut className="w-4 h-4" />
-                    <span>Logout</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[13px] font-medium">Logout</span>
+                    <ArrowRight className="w-4 h-4" />
                   </div>
                 )}
               </Button>
