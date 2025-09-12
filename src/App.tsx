@@ -8,6 +8,7 @@ import { ProgressProvider } from "./contexts/ProgressContext";
 import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import { CommunityProvider } from "./contexts/CommunityContext";
 
 const queryClient = new QueryClient();
 
@@ -19,14 +20,16 @@ const App = () => {
           <TooltipProvider>
             <Toaster />
             <Sonner />
-            <BrowserRouter>
-                    <Routes>
-                      <Route path="/" element={<HomePage />} />
-                      <Route path="/dashboard" element={<Dashboard />} />
-                      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-            </BrowserRouter>
+            <CommunityProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </BrowserRouter>
+            </CommunityProvider>
           </TooltipProvider>
         </ProgressProvider>
       </AuthProvider>
