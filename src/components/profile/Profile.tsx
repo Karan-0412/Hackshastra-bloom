@@ -139,16 +139,9 @@ const Profile: React.FC = () => {
             {/* Post composer */}
             <Card className="rounded-3xl bg-white/90">
               <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  {profile?.pokemonAvatar ? (
-                    <img src={profile?.pokemonAvatar} alt="Avatar" className="w-10 h-10 rounded-full object-cover" />
-                  ) : (
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-pink-500 text-white flex items-center justify-center text-sm font-semibold">
-                      {name.charAt(0)}
-                    </div>
-                  )}
-                  <Input placeholder="My latest trip was..." className="rounded-full" />
-                  <Button className="rounded-full bg-indigo-500 hover:bg-indigo-600">Post now</Button>
+                <div className="mb-2 text-sm font-medium text-slate-700">Share your environmental activity</div>
+                <div className="max-w-2xl">
+                  <CreatePost />
                 </div>
               </CardContent>
             </Card>
