@@ -8,6 +8,7 @@ import { ProgressProvider } from "./contexts/ProgressContext";
 import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import AvatarPickerPage from '@/pages/AvatarPickerPage';
 import { CommunityProvider } from "./contexts/CommunityContext";
 
 const queryClient = new QueryClient();
