@@ -4,7 +4,7 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, Monitor, MessageSquare, PlayCircle, Video, LogOut } from 'lucide-react';
+import { Calendar, Monitor, MessageSquare, PlayCircle, Video, LogOut, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Gift, Flame, Leaf } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
@@ -255,15 +255,15 @@ const Dashboard: React.FC = () => {
     <div className="min-h-screen bg-[#F6F7FB] parallax-container">
       {/* Header */}
       <header className="bg-white/95 backdrop-blur-md shadow-
-      xl sticky top-4 z-50 mx-4 rounded-2xl border border-white/20 navbar-3d navbar-shadow navbar-curved navbar-floating navbar-glass">
+      xl sticky top-4 z-50 mx-4 rounded-3xl border border-white/20 navbar-3d navbar-shadow navbar-curved navbar-floating navbar-glass">
         <div className="w-full px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo Section */}
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">E</span>
+              <div className="w-7 h-7 bg-black rounded-lg flex items-center justify-center">
+                <span className="text-white font-semibold text-[13px] leading-none">E</span>
               </div>
-              <h1 className="text-xl font-semibold text-gray-800">
+              <h1 className="text-[14px] font-medium text-gray-800">
                 EcoEdu Punjab
               </h1>
             </div>
@@ -271,42 +271,36 @@ const Dashboard: React.FC = () => {
             {/* Centered Navigation */}
             <div className="flex-1 flex justify-center">
               <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="bg-gray-100 rounded-full p-0.5 [&>button]:rounded-none [&>button]:first:rounded-l-full [&>button]:last:rounded-r-full [&>button]:not(:first-child):not(:last-child):rounded-none">
+                <TabsList className="bg-slate-100/80 border rounded-full p-1 shadow-inner backdrop-blur supports-[backdrop-filter]:bg-slate-100/60 [&>button]:rounded-none [&>button]:first:rounded-l-full [&>button]:last:rounded-r-full [&>button]:not(:first-child):not(:last-child):rounded-none">
                   <TabsTrigger 
                     value="dashboard" 
-                    className="data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 rounded-full transition-all duration-300 ease-out hover:bg-slate-200/60 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Dashboard
                   </TabsTrigger>
                   <TabsTrigger 
                     value="lessons" 
-                    className="data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 rounded-full transition-all duration-300 ease-out hover:bg-slate-200/60 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Lessons
                   </TabsTrigger>
                   <TabsTrigger 
                     value="challenges" 
-                    className="data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 rounded-full transition-all duration-300 ease-out hover:bg-slate-200/60 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Challenges
                   </TabsTrigger>
                   <TabsTrigger 
                     value="community" 
-                    className="data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 rounded-full transition-all duration-300 ease-out hover:bg-slate-200/60 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Community
                   </TabsTrigger>
                   <TabsTrigger 
                     value="news" 
-                    className="data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 rounded-full transition-all duration-300 ease-out hover:bg-slate-200/60 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     News
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="profile" 
-                    className="data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
-                  >
-                    Profile
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
@@ -320,27 +314,30 @@ const Dashboard: React.FC = () => {
               </div>
               
               {/* User Avatar */}
-              <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                <span className="text-gray-600 text-sm font-medium">K</span>
-              </div>
+              <button type="button" onClick={() => setActiveTab('profile')} className="focus:outline-none">
+                <Avatar className="h-8 w-8 cursor-pointer ring-2 ring-white">
+                  <AvatarImage src="" alt={profile?.full_name || 'Profile'} />
+                  <AvatarFallback>{(profile?.full_name?.[0] || 'U').toUpperCase()}</AvatarFallback>
+                </Avatar>
+              </button>
               
               {/* Logout Button */}
               <Button
                 onClick={handleSignOut}
                 variant="outline"
                 size="sm"
-                className="text-red-500 border-red-200 hover:bg-red-50 hover:border-red-300 rounded-full px-4 py-2"
+                className="group rounded-full border-2 border-red-300 text-red-600 bg-white hover:bg-red-50 hover:border-red-400 hover:text-red-700 transition-all duration-200 ease-out px-4 py-2 active:scale-[0.98]"
                 disabled={isSigningOut}
               >
                 {isSigningOut ? (
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-red-500 border-t-transparent rounded-full animate-spin"></div>
-                    <span>Logging out...</span>
+                    <span className="text-[13px]">Logging out...</span>
                   </div>
                 ) : (
-                  <div className="flex items-center space-x-2">
-                    <LogOut className="w-4 h-4" />
-                    <span>Logout</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[13px] font-medium">Logout</span>
+                    <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                   </div>
                 )}
               </Button>
@@ -367,38 +364,72 @@ const Dashboard: React.FC = () => {
             </CardContent>
           </Card>
 
-          {/* Progress statistics */}
-          <Card className="rounded-3xl border bg-white">
-            <CardContent className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Progress statistics</h3>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="flex-1 h-2 rounded-full bg-slate-200">
-                  <div className="h-2 rounded-full bg-gradient-to-r from-green-400 via-yellow-400 to-emerald-500" style={{ width: '64%' }} />
+          {/* Progress statistics column with extras */}
+          <div className="space-y-6">
+            <Card className="rounded-3xl border bg-white">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-4">Progress statistics</h3>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="flex-1 h-2 rounded-full bg-slate-200">
+                    <div className="h-2 rounded-full bg-gradient-to-r from-green-400 via-yellow-400 to-emerald-500" style={{ width: '64%' }} />
+                  </div>
+                  <div className="text-4xl font-semibold">64%</div>
                 </div>
-                <div className="text-4xl font-semibold">64%</div>
-              </div>
-              <div className="grid grid-cols-4 gap-4">
-                <div className="text-center rounded-2xl border p-4">
-                  <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 mx-auto flex items-center justify-center mb-2">8</div>
-                  <div className="text-xs text-muted-foreground">In progress</div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="text-center rounded-2xl border p-4">
+                    <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 mx-auto flex items-center justify-center mb-2">8</div>
+                    <div className="text-xs text-muted-foreground">In progress</div>
+                  </div>
+                  <div className="text-center rounded-2xl border p-4">
+                    <div className="w-10 h-10 rounded-full bg-green-100 text-green-600 mx-auto flex items-center justify-center mb-2">12</div>
+                    <div className="text-xs text-muted-foreground">Completed</div>
+                  </div>
+                  <div className="text-center rounded-2xl border p-4">
+                    <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center mb-2">2</div>
+                    <div className="text-xs text-muted-foreground">Late</div>
+                  </div>
+                  <div className="text-center rounded-2xl border p-4">
+                    <div className="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 mx-auto flex items-center justify-center mb-2">14</div>
+                    <div className="text-xs text-muted-foreground">Upcoming</div>
+                  </div>
                 </div>
-                <div className="text-center rounded-2xl border p-4">
-                  <div className="w-10 h-10 rounded-full bg-green-100 text-green-600 mx-auto flex items-center justify-center mb-2">12</div>
-                  <div className="text-xs text-muted-foreground">Completed</div>
-                </div>
-                <div className="text-center rounded-2xl border p-4">
-                  <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center mb-2">2</div>
-                  <div className="text-xs text-muted-foreground">Late</div>
-                </div>
-                <div className="text-center rounded-2xl border p-4">
-                  <div className="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 mx-auto flex items-center justify-center mb-2">14</div>
-                  <div className="text-xs text-muted-foreground">Upcoming</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          {/* Previous cards: Eco Tree, Daily Reward, Learning Streak */}
+            {/* Daily Reward under statistics */}
+            <Card className="rounded-3xl border bg-white">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <Gift className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-1">Daily Reward</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Claim your daily bonus.</p>
+                    <Button className="bg-green-600 hover:bg-green-700 text-white rounded-xl">Claim 50 pts</Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Streak under statistics */}
+            <Card className="rounded-3xl border bg-white">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <Flame className="w-6 h-6 text-orange-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-1">Learning Streak</h3>
+                    <p className="text-sm text-muted-foreground">7 days in a row.</p>
+                    <div className="text-2xl font-bold text-orange-600">7 days</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Eco Tree column */}
           <div className="space-y-6">
             <Card className="rounded-3xl border bg-white md:min-h-[360px]">
               <CardContent className="p-6">
@@ -415,36 +446,6 @@ const Dashboard: React.FC = () => {
                   <ErrorBoundary>
                     <CustomEcoTree />
                   </ErrorBoundary>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="rounded-3xl border bg-white">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <Gift className="w-6 h-6 text-purple-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-1">Daily Reward</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Claim your daily bonus.</p>
-                    <Button className="bg-green-600 hover:bg-green-700 text-white rounded-xl">Claim 50 pts</Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="rounded-3xl border bg-white">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-                    <Flame className="w-6 h-6 text-orange-600" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold mb-1">Learning Streak</h3>
-                    <p className="text-sm text-muted-foreground">7 days in a row.</p>
-                    <div className="text-2xl font-bold text-orange-600">7 days</div>
-                  </div>
                 </div>
               </CardContent>
             </Card>

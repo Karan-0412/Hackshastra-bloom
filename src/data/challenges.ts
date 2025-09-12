@@ -33,7 +33,7 @@ export const CHALLENGES: Challenge[] = [
   // DAILY CHALLENGES
   {
     id: 'daily-water-bottle',
-    title: '💧 Reusable Water Bottle Day',
+    title: 'Reusable Water Bottle Day',
     description: 'Use only a reusable water bottle for the entire day',
     type: 'daily',
     category: 'waste',
@@ -55,7 +55,7 @@ export const CHALLENGES: Challenge[] = [
   },
   {
     id: 'daily-lights-off',
-    title: '💡 Lights Off Challenge',
+    title: 'Lights Off Challenge',
     description: 'Turn off all unnecessary lights for 2 hours',
     type: 'daily',
     category: 'energy',
@@ -77,7 +77,7 @@ export const CHALLENGES: Challenge[] = [
   },
   {
     id: 'daily-walk',
-    title: '🚶‍♀️ Green Commute',
+    title: 'Green Commute',
     description: 'Walk or cycle instead of using motorized transport',
     type: 'daily',
     category: 'climate',
@@ -101,7 +101,7 @@ export const CHALLENGES: Challenge[] = [
   // WEEKLY CHALLENGES
   {
     id: 'weekly-meat-free',
-    title: '🌱 Meat-Free Week',
+    title: 'Meat-Free Week',
     description: 'Go vegetarian for an entire week',
     type: 'weekly',
     category: 'climate',
@@ -123,7 +123,7 @@ export const CHALLENGES: Challenge[] = [
   },
   {
     id: 'weekly-waste-audit',
-    title: '🗑️ Zero Waste Week',
+    title: 'Zero Waste Week',
     description: 'Minimize waste to less than 1kg for the week',
     type: 'weekly',
     category: 'waste',
@@ -146,7 +146,7 @@ export const CHALLENGES: Challenge[] = [
   },
   {
     id: 'weekly-garden',
-    title: '🌿 Plant Care Week',
+    title: 'Plant Care Week',
     description: 'Tend to plants and learn about local biodiversity',
     type: 'weekly',
     category: 'biodiversity',
@@ -171,7 +171,7 @@ export const CHALLENGES: Challenge[] = [
   // MONTHLY CHALLENGES
   {
     id: 'monthly-energy-audit',
-    title: '⚡ Energy Audit Month',
+    title: 'Energy Audit Month',
     description: 'Reduce home energy consumption by 20%',
     type: 'monthly',
     category: 'energy',
@@ -194,7 +194,7 @@ export const CHALLENGES: Challenge[] = [
   },
   {
     id: 'monthly-community-cleanup',
-    title: '🧹 Community Cleanup',
+    title: 'Community Cleanup',
     description: 'Organize or participate in 4 community cleanup events',
     type: 'monthly',
     category: 'waste',
@@ -219,7 +219,7 @@ export const CHALLENGES: Challenge[] = [
   // SPECIAL CHALLENGES
   {
     id: 'special-earth-hour',
-    title: '🌍 Earth Hour Challenge',
+    title: 'Earth Hour Challenge',
     description: 'Participate in Earth Hour and extend it to 3 hours',
     type: 'special',
     category: 'climate',
@@ -242,7 +242,7 @@ export const CHALLENGES: Challenge[] = [
   },
   {
     id: 'special-plastic-free-month',
-    title: '🚫 Plastic-Free Month',
+    title: 'Plastic-Free Month',
     description: 'Avoid single-use plastics for an entire month',
     type: 'special',
     category: 'waste',
@@ -267,7 +267,7 @@ export const CHALLENGES: Challenge[] = [
   // GAME-BASED CHALLENGES
   {
     id: 'game-eco-simulator',
-    title: '🎮 Eco City Simulator',
+    title: 'Eco City Simulator',
     description: 'Build a sustainable city in our interactive game (Coming Soon)',
     type: 'daily',
     category: 'climate',
@@ -290,7 +290,7 @@ export const CHALLENGES: Challenge[] = [
   },
   {
     id: 'game-waste-sorting',
-    title: '♻️ Waste Sorting Master',
+    title: 'Waste Sorting Master',
     description: 'Master the art of waste sorting in our mini-game (Coming Soon)',
     type: 'daily',
     category: 'waste',
@@ -313,7 +313,7 @@ export const CHALLENGES: Challenge[] = [
   },
   {
     id: 'game-carbon-calculator',
-    title: '📊 Carbon Footprint Calculator',
+    title: 'Carbon Footprint Calculator',
     description: 'Calculate and reduce your carbon footprint (Coming Soon)',
     type: 'weekly',
     category: 'climate',
