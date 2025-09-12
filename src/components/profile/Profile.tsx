@@ -8,8 +8,8 @@ import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Search, Plus, UserPlus, ChevronRight, Edit3, Save, X } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import PokemonAvatarPicker from '@/components/auth/PokemonAvatarPicker';
 import CreatePost from '@/components/community/CreatePost';
+import { useNavigate } from 'react-router-dom';
 
 const StatPill: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   <div className="flex flex-col items-center justify-center rounded-2xl bg-white/90 shadow-sm px-6 py-4">
