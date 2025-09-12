@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import PostCard from './PostCard';
 import StoriesBar from './StoriesBar';
 import CommunityRightSidebar from './CommunityRightSidebar';
+import StoryViewer from './StoryViewer';
 import { useCommunity } from '@/contexts/CommunityContext';
 
 const CommunityFeed: React.FC = () => {
@@ -9,12 +10,14 @@ const CommunityFeed: React.FC = () => {
   const feed = useMemo(() => posts
     .filter(p => p.approved)
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt)), [posts]);
+  const [viewerOpen, setViewerOpen] = React.useState(false);
+  const [viewerStart, setViewerStart] = React.useState<string | null>(null);
 
   return (
     <div className="mx-auto w-full max-w-6xl">
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-8">
         <div className="max-w-xl w-full mx-auto space-y-6">
-          <StoriesBar />
+          <StoriesBar onSelect={(id) => { setViewerStart(id); setViewerOpen(true); }} />
           {feed.length === 0 ? (
             <div className="text-center text-muted-foreground py-12">No posts yet. Be the first to share your eco-action!</div>
           ) : (
@@ -25,6 +28,7 @@ const CommunityFeed: React.FC = () => {
           <CommunityRightSidebar />
         </div>
       </div>
+      <StoryViewer open={viewerOpen} onOpenChange={setViewerOpen} startId={viewerStart} />
     </div>
   );
 };
