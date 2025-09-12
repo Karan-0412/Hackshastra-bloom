@@ -275,7 +275,7 @@ export default function NewsSection({ className }: NewsSectionProps) {
                   {NEWS_CATEGORIES.map((category) => (
                     <SelectItem key={category.id} value={category.id}>
                       <div className="flex items-center gap-2">
-                        <span>{category.icon}</span>
+                        <span className="text-slate-700">{getCategoryIcon(category.id)}</span>
                         <span>{category.name}</span>
                       </div>
                     </SelectItem>
