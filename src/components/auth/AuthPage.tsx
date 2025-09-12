@@ -72,22 +72,22 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 p-4">
       <Card className="w-full max-w-md shadow-xl border-0 bg-white/95 backdrop-blur-sm">
         <CardHeader className="text-center pb-8">
-          <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
+          <div className="mx-auto mb-4 w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center">
             <span className="text-2xl">🌱</span>
           </div>
-          <CardTitle className="text-2xl font-bold text-blue-900">Environmental Education Platform</CardTitle>
-          <CardDescription className="text-blue-600">
+          <CardTitle className="text-2xl font-bold text-green-900">Environmental Education Platform</CardTitle>
+          <CardDescription className="text-green-700">
             Learn about our planet through interactive games and challenges
           </CardDescription>
         </CardHeader>
         <CardContent className="px-8 pb-8">
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-blue-50 mb-6">
-              <TabsTrigger value="signin" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white">Sign In</TabsTrigger>
-              <TabsTrigger value="signup" className="data-[state=active]:bg-blue-500 data-[state=active]:text-white">Sign Up</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-green-50 mb-6">
+              <TabsTrigger value="signin" className="data-[state=active]:bg-green-600 data-[state=active]:text-white">Sign In</TabsTrigger>
+              <TabsTrigger value="signup" className="data-[state=active]:bg-green-600 data-[state=active]:text-white">Sign Up</TabsTrigger>
             </TabsList>
             
             <TabsContent value="signin">
@@ -112,7 +112,7 @@ const AuthPage = () => {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2.5" disabled={loading}>
+                <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2.5" disabled={loading}>
                   {loading ? 'Signing In...' : 'Sign In'}
                 </Button>
               </form>

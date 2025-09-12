@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Progress } from '@/components/ui/progress';
 import { Search, Plus, UserPlus, ChevronRight } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import CreatePost from '@/components/community/CreatePost';
 
 const StatPill: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   <div className="flex flex-col items-center justify-center rounded-2xl bg-white/90 shadow-sm px-6 py-4">
@@ -137,21 +138,9 @@ const Profile: React.FC = () => {
             </div>
 
             {/* Post composer */}
-            <Card className="rounded-3xl bg-white/90">
-              <CardContent className="p-4">
-                <div className="flex items-center gap-3">
-                  {profile?.pokemonAvatar ? (
-                    <img src={profile?.pokemonAvatar} alt="Avatar" className="w-10 h-10 rounded-full object-cover" />
-                  ) : (
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-pink-500 text-white flex items-center justify-center text-sm font-semibold">
-                      {name.charAt(0)}
-                    </div>
-                  )}
-                  <Input placeholder="My latest trip was..." className="rounded-full" />
-                  <Button className="rounded-full bg-indigo-500 hover:bg-indigo-600">Post now</Button>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="max-w-2xl">
+              <CreatePost />
+            </div>
 
             {/* Bottom stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -21,6 +21,8 @@ import UnifiedLessonSystem from '@/components/lessons/UnifiedLessonSystem';
 import NewsSection from '@/components/news/NewsSection';
 import GameModal from '@/components/rpg/GameModal';
 import Profile from '@/components/profile/Profile';
+import CommunityFeed from '@/components/community/CommunityFeed';
+import DiscoverFeed from '@/components/community/DiscoverFeed';
 import { QuizModule } from '@/data/quizData';
 import { Challenge, getUnlockedChallenges } from '@/data/challenges';
 import { Lesson } from '@/data/lessons';
@@ -290,14 +292,20 @@ const Dashboard: React.FC = () => {
                   >
                     Challenges
                   </TabsTrigger>
-                  <TabsTrigger 
-                    value="community" 
+                  <TabsTrigger
+                    value="community"
                     className="px-5 py-2 text-[13px] font-medium text-slate-600 rounded-full transition-all duration-300 ease-out hover:bg-slate-200/60 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Community
                   </TabsTrigger>
-                  <TabsTrigger 
-                    value="news" 
+                  <TabsTrigger
+                    value="discover"
+                    className="px-5 py-2 text-[13px] font-medium text-slate-600 rounded-full transition-all duration-300 ease-out hover:bg-slate-200/60 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
+                  >
+                    Discover
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="news"
                     className="px-5 py-2 text-[13px] font-medium text-slate-600 rounded-full transition-all duration-300 ease-out hover:bg-slate-200/60 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     News
@@ -480,9 +488,14 @@ const Dashboard: React.FC = () => {
           </TabsContent>
 
           <TabsContent value="community" className="mt-6">
-            <div className="text-center py-12">
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">Community Coming Soon</h3>
-              <p className="text-blue-600">Connect with other environmental learners and share your progress.</p>
+            <div className="max-w-6xl mx-auto">
+              <CommunityFeed />
+            </div>
+          </TabsContent>
+
+          <TabsContent value="discover" className="mt-6">
+            <div className="max-w-6xl mx-auto">
+              <DiscoverFeed />
             </div>
           </TabsContent>
 
