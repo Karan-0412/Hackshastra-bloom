@@ -12,7 +12,7 @@ import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import Community from "./pages/Community";
 import NotFound from "./pages/NotFound";
-import { CommunityProvider } from "./contexts/CommunityContext";
+
 
 const queryClient = new QueryClient();
 

@@ -25,8 +25,9 @@ import RewardMap from '@/components/rewards/RewardMap';
 import NewsSection from '@/components/news/NewsSection';
 import GameModal from '@/components/rpg/GameModal';
 import Profile from '@/components/profile/Profile';
-import SimpleEnhancedDashboard from '@/components/dashboard/SimpleEnhancedDashboard';
 import CommunityFeed from '@/components/community/CommunityFeed';
+import SimpleEnhancedDashboard from '@/components/dashboard/SimpleEnhancedDashboard';
+
 import QuizPage from '@/pages/QuizPage';
 import WelcomeQuiz from '@/components/onboarding/WelcomeQuiz';
 import DeveloperMode from '@/components/dev/DeveloperMode';
@@ -636,10 +637,111 @@ const Dashboard: React.FC = () => {
       <main className="px-2 py-6 pt-24">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsContent value="dashboard" className="mt-6">
-            <SimpleEnhancedDashboard 
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Activity */}
+          <Card className="rounded-3xl border bg-white">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-lg font-semibold">Activity</h3>
+                <span className="text-xs text-muted-foreground">Last 7 days</span>
+              </div>
+              <div className="text-5xl font-semibold mb-2">24,9</div>
+              <div className="text-sm text-muted-foreground mb-6">Hours spent</div>
+              <ActivityBars />
+            </CardContent>
+          </Card>
+
+          {/* Progress statistics column with extras */}
+          <div className="space-y-6">
+            <Card className="rounded-3xl border bg-white">
+              <CardContent className="p-6">
+                <h3 className="text-lg font-semibold mb-4">Progress statistics</h3>
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="flex-1 h-2 rounded-full bg-slate-200">
+                    <div className="h-2 rounded-full bg-gradient-to-r from-green-400 via-yellow-400 to-emerald-500" style={{ width: '64%' }} />
+                  </div>
+                  <div className="text-4xl font-semibold">64%</div>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                  <div className="text-center rounded-2xl border p-4">
+                    <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 mx-auto flex items-center justify-center mb-2">8</div>
+                    <div className="text-xs text-muted-foreground">In progress</div>
+                  </div>
+                  <div className="text-center rounded-2xl border p-4">
+                    <div className="w-10 h-10 rounded-full bg-green-100 text-green-600 mx-auto flex items-center justify-center mb-2">12</div>
+                    <div className="text-xs text-muted-foreground">Completed</div>
+                  </div>
+                  <div className="text-center rounded-2xl border p-4">
+                    <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center mb-2">2</div>
+                    <div className="text-xs text-muted-foreground">Late</div>
+                  </div>
+                  <div className="text-center rounded-2xl border p-4">
+                    <div className="w-10 h-10 rounded-full bg-yellow-100 text-yellow-600 mx-auto flex items-center justify-center mb-2">14</div>
+                    <div className="text-xs text-muted-foreground">Upcoming</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Daily Reward under statistics */}
+            <Card className="rounded-3xl border bg-white">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <Gift className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-1">Daily Reward</h3>
+                    <p className="text-sm text-muted-foreground mb-3">Claim your daily bonus.</p>
+                    <Button className="bg-green-600 hover:bg-green-700 text-white rounded-xl">Claim 50 pts</Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Streak under statistics */}
+            <Card className="rounded-3xl border bg-white">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                    <Flame className="w-6 h-6 text-orange-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-1">Learning Streak</h3>
+                    <p className="text-sm text-muted-foreground">7 days in a row.</p>
+                    <div className="text-2xl font-bold text-orange-600">7 days</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Eco Tree column */}
+          <div className="space-y-6">
+            <Card className="rounded-3xl border bg-white md:min-h-[360px]">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <Leaf className="w-6 h-6 text-green-600" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold mb-1">Your Eco Tree</h3>
+                    <p className="text-sm text-muted-foreground">Grows with your environmental actions.</p>
+                  </div>
+                </div>
+                <div className="mt-5">
+                  <ErrorBoundary>
+                    <CustomEcoTree />
+                  </ErrorBoundary>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+            {/* <SimpleEnhancedDashboard 
               userProgress={userProgress}
               onNavigate={(tab) => setActiveTab(tab)}
-            />
+            /> */}
           </TabsContent>
 
           <TabsContent value="lessons" className="mt-6">
