@@ -138,14 +138,9 @@ const Profile: React.FC = () => {
             </div>
 
             {/* Post composer */}
-            <Card className="rounded-3xl bg-white/90">
-              <CardContent className="p-4">
-                <div className="mb-2 text-sm font-medium text-slate-700">Share your environmental activity</div>
-                <div className="max-w-2xl">
-                  <CreatePost />
-                </div>
-              </CardContent>
-            </Card>
+            <div className="max-w-2xl">
+              <CreatePost />
+            </div>
 
             {/* Bottom stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
