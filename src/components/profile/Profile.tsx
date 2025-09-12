@@ -49,6 +49,11 @@ const Profile: React.FC = () => {
   const handleCoverChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !profile) return;
+
+    // Instant local preview regardless of upload result
+    const localUrl = URL.createObjectURL(file);
+    setLocalCoverUrl(localUrl);
+
     setUploading(true);
     try {
       const path = `${profile.user_id}/cover/${Date.now()}_${file.name}`;
@@ -56,18 +61,20 @@ const Profile: React.FC = () => {
         .from('certificates')
         .upload(path, file, { upsert: false });
       if (uploadError) throw uploadError;
+
       const { data: { publicUrl } } = supabase.storage
         .from('certificates')
         .getPublicUrl(path);
       setLocalCoverUrl(publicUrl);
-      const { error } = await updateProfile({ coverImage: publicUrl } as any) || {} as any;
+      const { error } = await (updateProfile({ coverImage: publicUrl } as any) || ({} as any));
       if (error) {
         console.error('Failed to persist cover URL:', error);
       }
       toast({ title: 'Cover photo updated' });
     } catch (err: any) {
       console.error('Cover upload failed:', err);
-      toast({ title: 'Upload failed', description: err.message || 'Could not upload cover', variant: 'destructive' });
+      // Keep local preview even if upload fails
+      toast({ title: 'Preview set locally', description: 'Upload failed, but preview works.', variant: 'destructive' });
     } finally {
       setUploading(false);
       e.target.value = '';
