@@ -134,15 +134,6 @@ const Profile: React.FC = () => {
     setSelectedAvatar(avatarUrl);
   };
 
-  const handleAvatarConfirm = () => {
-    setShowAvatarPicker(false);
-  };
-
-  const handleAvatarSkip = () => {
-    setSelectedAvatar(null);
-    setShowAvatarPicker(false);
-  };
-
   return (
     <div className="bg-gradient-to-br from-[#e8edff] via-[#eef1ff] to-[#f3eaff]">
       <div className="mx-auto max-w-7xl px-6 py-8">
