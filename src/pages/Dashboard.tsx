@@ -21,6 +21,7 @@ import UnifiedLessonSystem from '@/components/lessons/UnifiedLessonSystem';
 import NewsSection from '@/components/news/NewsSection';
 import GameModal from '@/components/rpg/GameModal';
 import Profile from '@/components/profile/Profile';
+import CommunityFeed from '@/components/community/CommunityFeed';
 import { QuizModule } from '@/data/quizData';
 import { Challenge, getUnlockedChallenges } from '@/data/challenges';
 import { Lesson } from '@/data/lessons';
