@@ -49,9 +49,9 @@ const Profile: React.FC = () => {
   // Edit state
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(profile?.full_name || '');
-  const [showAvatarPicker, setShowAvatarPicker] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(profile?.pokemon_avatar || null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const navigate = useNavigate();
 
   // Cover / upload state
   const [localCoverUrl, setLocalCoverUrl] = useState<string | undefined>(undefined);
