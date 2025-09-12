@@ -47,6 +47,56 @@ const getCategoryColor = (category: string) => {
   }
 };
 
+// Simple inline comments component persisted to localStorage. Keeps markup minimal and accessible.
+const ArticleComments: React.FC<{ articleId: string }> = ({ articleId }) => {
+  const STORAGE = 'news_comments_v1';
+  const [commentsMap, setCommentsMap] = useState<Record<string, { id: string; text: string; createdAt: string }[]>>({});
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE);
+      setCommentsMap(raw ? JSON.parse(raw) : {});
+    } catch { setCommentsMap({}); }
+  }, []);
+
+  const persist = (next: Record<string, { id: string; text: string; createdAt: string }[]>) => {
+    try { localStorage.setItem(STORAGE, JSON.stringify(next)); setCommentsMap(next); } catch {}
+  };
+
+  const addComment = () => {
+    const t = value.trim();
+    if (!t) return;
+    const c = { id: `${Date.now()}_${Math.random().toString(36).slice(2)}`, text: t, createdAt: new Date().toISOString() };
+    const next = { ...commentsMap };
+    next[articleId] = next[articleId] ? [c, ...next[articleId]] : [c];
+    persist(next);
+    setValue('');
+  };
+
+  const comments = commentsMap[articleId] || [];
+
+  return (
+    <div className="mt-3 border-t pt-3">
+      <div className="text-sm text-slate-600 mb-2">Comments ({comments.length})</div>
+      <div className="space-y-2">
+        <div>
+          <input value={value} onChange={(e) => setValue(e.target.value)} placeholder="Add a comment..." className="w-full p-2 rounded-lg border" onKeyDown={(e) => { if (e.key === 'Enter') addComment(); }} />
+          <div className="flex justify-end mt-2">
+            <Button size="sm" onClick={addComment} disabled={!value.trim()}>Post</Button>
+          </div>
+        </div>
+        {comments.map(c => (
+          <div key={c.id} className="p-2 rounded bg-gray-50">
+            <div className="text-sm text-slate-800">{c.text}</div>
+            <div className="text-xs text-slate-400 mt-1">{new Date(c.createdAt).toLocaleString()}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export default function NewsSection({ className }: NewsSectionProps) {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [filteredArticles, setFilteredArticles] = useState<NewsArticle[]>([]);
