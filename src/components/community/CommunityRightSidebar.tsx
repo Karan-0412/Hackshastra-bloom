@@ -16,13 +16,24 @@ const CommunityRightSidebar: React.FC = () => {
   const [groupOpen, setGroupOpen] = useState(false);
   const [messagesOpen, setMessagesOpen] = useState(false);
   const [partner, setPartner] = useState<{ id: string; name: string; avatarUrl?: string | null } | null>(null);
+  const [followed, setFollowed] = useState<string[]>([]);
+
+  const MOCK_PEOPLE: { id: string; name: string; avatarUrl?: string | null }[] = [
+    { id: 'p1', name: 'Ayesha Khan', avatarUrl: 'https://i.pravatar.cc/80?img=1' },
+    { id: 'p2', name: 'Ravi Sharma', avatarUrl: 'https://i.pravatar.cc/80?img=5' },
+    { id: 'p3', name: 'Meera Patel', avatarUrl: 'https://i.pravatar.cc/80?img=8' },
+    { id: 'p4', name: 'Omar Ali', avatarUrl: 'https://i.pravatar.cc/80?img=11' },
+    { id: 'p5', name: 'Sophia Lee', avatarUrl: 'https://i.pravatar.cc/80?img=15' },
+    { id: 'p6', name: 'Lucas Silva', avatarUrl: 'https://i.pravatar.cc/80?img=20' },
+  ];
 
   const people = useMemo(() => {
     const map = new Map<string, { name: string; avatar?: string | null }>();
+    MOCK_PEOPLE.forEach(p => { if (!map.has(p.id)) map.set(p.id, { name: p.name, avatar: p.avatarUrl }); });
     posts.forEach(p => {
       if (p.user.id !== currentUser?.id && !map.has(p.user.id)) map.set(p.user.id, { name: p.user.name, avatar: p.user.avatarUrl });
     });
-    return Array.from(map.entries()).map(([id, v]) => ({ id, ...v })).slice(0, 6);
+    return Array.from(map.entries()).map(([id, v]) => ({ id, ...v })).slice(0, 8);
   }, [posts, currentUser]);
 
   return (
@@ -35,7 +46,7 @@ const CommunityRightSidebar: React.FC = () => {
               <Camera className="h-4 w-4 mr-2" /> Post Story
             </Button>
             <Button onClick={() => setPhotoOpen(true)} variant="outline" className="border-green-300 text-green-700 hover:bg-green-50">
-              <ImagePlus className="h-4 w-4 mr-2" /> Post Photo
+              <ImagePlus className="h-4 w-4 mr-2" /> Post Photo/Video
             </Button>
             <Button onClick={() => setGroupOpen(true)} variant="outline" className="border-slate-300">
               <Users className="h-4 w-4 mr-2" /> Create Group
@@ -49,7 +60,10 @@ const CommunityRightSidebar: React.FC = () => {
 
       <Card className="rounded-xl">
         <CardContent className="p-4 space-y-3">
-          <div className="text-sm font-semibold">People nearby</div>
+          <div className="flex items-center justify-between">
+            <div className="text-sm font-semibold">Suggestions for you</div>
+            <button className="text-xs text-slate-500 hover:text-slate-700">See All</button>
+          </div>
           <div className="space-y-3">
             {people.length === 0 && (
               <div className="text-sm text-muted-foreground">No suggestions yet.</div>
@@ -63,7 +77,14 @@ const CommunityRightSidebar: React.FC = () => {
                   </Avatar>
                   <div className="text-sm font-medium">{p.name}</div>
                 </div>
-                <Button size="sm" variant="outline" className="rounded-full" onClick={() => { setPartner({ id: p.id, name: p.name, avatarUrl: p.avatar }); setMessagesOpen(true); }}>Message</Button>
+                <Button
+                  size="sm"
+                  className={"rounded-full " + (followed.includes(p.id) ? 'bg-slate-200 text-slate-700 hover:bg-slate-200' : 'bg-slate-900 text-white hover:bg-slate-800')}
+                  variant={followed.includes(p.id) ? 'secondary' : 'default'}
+                  onClick={() => setFollowed(prev => prev.includes(p.id) ? prev.filter(id => id !== p.id) : [...prev, p.id])}
+                >
+                  {followed.includes(p.id) ? 'Following' : 'Follow'}
+                </Button>
               </div>
             ))}
           </div>

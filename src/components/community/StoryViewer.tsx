@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { useCommunity } from '@/contexts/CommunityContext';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -25,6 +25,7 @@ const StoryViewer: React.FC<{ open: boolean; onOpenChange: (v: boolean) => void;
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl p-0 bg-black/90 text-white border-0">
+        <DialogTitle className="sr-only">Story viewer</DialogTitle>
         {current ? (
           <div className="relative">
             <div className="flex items-center gap-3 p-3">

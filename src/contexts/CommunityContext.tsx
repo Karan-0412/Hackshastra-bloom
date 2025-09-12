@@ -48,6 +48,8 @@ interface CommunityContextValue {
   addComment: (postId: string, text: string) => void;
   addStory: (input: { mediaUrl: string; caption?: string }) => void;
   currentUser?: UserSummary | null;
+  openMessages: (partner: { id: string; name: string; avatarUrl?: string | null } | null) => void;
+  closeMessages: () => void;
 }
 
 const CommunityContext = createContext<CommunityContextValue | undefined>(undefined);
@@ -73,6 +75,18 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const { profile } = useProfile();
   const [posts, setPosts] = useState<PostItem[]>([]);
   const [stories, setStories] = useState<StoryItem[]>([]);
+  const [dmOpen, setDmOpen] = useState(false);
+  const [dmPartner, setDmPartner] = useState<{ id: string; name: string; avatarUrl?: string | null } | null>(null);
+
+  const openMessages = useCallback((partner: { id: string; name: string; avatarUrl?: string | null } | null) => {
+    setDmPartner(partner);
+    setDmOpen(true);
+  }, []);
+
+  const closeMessages = useCallback(() => {
+    setDmOpen(false);
+    setDmPartner(null);
+  }, []);
 
   const currentUser: UserSummary | null = useMemo(() => {
     if (!user) return null;
