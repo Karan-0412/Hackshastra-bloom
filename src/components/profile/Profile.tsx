@@ -126,7 +126,7 @@ const Profile: React.FC = () => {
       // Keep local preview even if upload fails
       toast({ title: 'Preview set locally', description: 'Upload failed, but preview works.', variant: 'destructive' });
     } finally {
-      setIsUpdating(false);
+      setUploading(false);
     }
   };
 
