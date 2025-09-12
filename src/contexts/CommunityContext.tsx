@@ -48,6 +48,8 @@ interface CommunityContextValue {
   addComment: (postId: string, text: string) => void;
   addStory: (input: { mediaUrl: string; caption?: string }) => void;
   currentUser?: UserSummary | null;
+  openMessages: (partner: { id: string; name: string; avatarUrl?: string | null } | null) => void;
+  closeMessages: () => void;
 }
 
 const CommunityContext = createContext<CommunityContextValue | undefined>(undefined);
