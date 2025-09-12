@@ -144,48 +144,55 @@ export default function NewsSection({ className }: NewsSectionProps) {
 
   return (
     <div className={`space-y-6 ${className}`}>
-      {/* Header */}
-      <div className="text-center">
-        <h2 className="text-3xl font-bold text-green-900 mb-2">📰 Punjab's Environmental News</h2>
-        <p className="text-green-600 text-lg">Stay updated with environmental developments in Punjab and beyond</p>
-        <div className="mt-2 text-sm text-green-500">
-          🌱 Curated by the EcoEdu Punjab team
+      {/* Header with subscribe CTA */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-3xl custom-heading text-slate-900 mb-1">Punjab's Environmental News</h2>
+          <p className="custom-body text-slate-600">Stay updated with environmental developments in Punjab and beyond — curated by the EcoEdu Punjab team.</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <Input placeholder="Search news..." value={searchQuery} onChange={(e) => handleSearch(e.target.value)} className="hidden md:block w-72" />
+          <Button className="custom-button bg-amber-500 text-white shadow" onClick={() => { alert('Subscribed — thank you!'); }}>Subscribe</Button>
         </div>
       </div>
 
-      {/* Trending News Section */}
+      {/* Trending / Featured Stories */}
       {trendingNews.length > 0 && (
-        <Card className="bg-gradient-to-r from-blue-50 to-green-50 border-blue-200">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-blue-900">
-              <TrendingUp className="w-5 h-5" />
-              Trending Now
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {trendingNews.map((article) => (
-                <div key={article.id} className="bg-white rounded-lg p-4 border border-blue-100 hover:shadow-md transition-shadow">
-                  <div className="flex items-center gap-2 mb-2">
-                    {getCategoryIcon(article.category)}
-                    <Badge className={getCategoryColor(article.category)}>
-                      {article.category.replace('-', ' ')}
-                    </Badge>
-                  </div>
-                  <h4 className="font-semibold text-blue-900 mb-2 line-clamp-2">{article.title}</h4>
-                  <p className="text-sm text-gray-600 mb-3 line-clamp-2">{article.description}</p>
-                  <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span>{formatDate(article.publishedAt)}</span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {article.readTime} min read
-                    </span>
-                  </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            {/* Large featured story */}
+            <div className="custom-card overflow-hidden">
+              <div className="relative h-80 lg:h-96">
+                <img src={trendingNews[0].urlToImage} alt={trendingNews[0].title} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=1200&h=600&fit=crop'; }} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute bottom-6 left-6 text-white max-w-xl">
+                  <Badge className={`${getCategoryColor(trendingNews[0].category)} !text-xs`}>{trendingNews[0].category.replace('-', ' ')}</Badge>
+                  <h3 className="text-2xl md:text-3xl font-bold mt-2">{trendingNews[0].title}</h3>
+                  <p className="mt-2 text-sm text-white/90 line-clamp-2">{trendingNews[0].description}</p>
                 </div>
-              ))}
+                <div className="absolute top-4 right-4 flex gap-2">
+                  <Button size="sm" variant="outline" onClick={() => window.open(trendingNews[0].url, '_blank')}>Read</Button>
+                </div>
+              </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+
+          <div className="space-y-4">
+            {trendingNews.slice(1).map(a => (
+              <div key={a.id} className="flex gap-3 items-start custom-card p-3">
+                <img src={a.urlToImage} alt={a.title} className="w-32 h-20 object-cover rounded-md" onError={(e) => { e.currentTarget.src = 'https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=800&h=400&fit=crop'; }} />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    {getCategoryIcon(a.category)}
+                    <span className="text-xs text-muted-foreground">{a.source.name}</span>
+                  </div>
+                  <div className="font-semibold text-slate-900 line-clamp-2">{a.title}</div>
+                  <div className="text-sm text-slate-600 line-clamp-2">{a.description}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
 
       {/* Search and Filter Controls */}
