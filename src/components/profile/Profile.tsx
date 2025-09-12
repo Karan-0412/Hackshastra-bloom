@@ -157,7 +157,7 @@ const Profile: React.FC = () => {
                         </div>
                       )}
                       <button
-                        onClick={() => setShowAvatarPicker(true)}
+                        onClick={() => navigate('/profile/avatar')}
                         className="absolute -bottom-1 -right-1 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-blue-600 transition-colors"
                       >
                         ✏️
