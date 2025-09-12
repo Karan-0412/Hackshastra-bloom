@@ -20,29 +20,40 @@ export interface CommentItem {
 export interface PostItem {
   id: string;
   user: UserSummary;
-  mediaUrl: string; // data URL for now
+  mediaUrl: string;
   mediaType: MediaType;
   caption: string;
   tags: string[];
-  likes: string[]; // user ids
+  likes: string[];
   comments: CommentItem[];
   createdAt: string;
   approved: boolean;
   flaggedReason?: string;
 }
 
+export interface StoryItem {
+  id: string;
+  user: UserSummary;
+  mediaUrl: string;
+  createdAt: string;
+  caption?: string;
+}
+
 interface CommunityContextValue {
   posts: PostItem[];
+  stories: StoryItem[];
   addPost: (input: { mediaUrl: string; mediaType: MediaType; caption: string; tags: string[] }) => { approved: boolean; reason?: string };
   likePost: (postId: string) => void;
   unlikePost: (postId: string) => void;
   addComment: (postId: string, text: string) => void;
+  addStory: (input: { mediaUrl: string; caption?: string }) => void;
   currentUser?: UserSummary | null;
 }
 
 const CommunityContext = createContext<CommunityContextValue | undefined>(undefined);
 
-const STORAGE_KEY = 'communityPosts_v1';
+const STORAGE_KEY_POSTS = 'communityPosts_v1';
+const STORAGE_KEY_STORIES = 'communityStories_v1';
 
 const ENV_KEYWORDS = [
   'tree', 'trees', 'plant', 'planting', 'sapling', 'recycle', 'recycling', 'cleanup', 'clean-up', 'clean up', 'beach cleanup',
@@ -61,6 +72,7 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const { user } = useAuth();
   const { profile } = useProfile();
   const [posts, setPosts] = useState<PostItem[]>([]);
+  const [stories, setStories] = useState<StoryItem[]>([]);
 
   const currentUser: UserSummary | null = useMemo(() => {
     if (!user) return null;
@@ -73,23 +85,25 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw) as PostItem[];
-        setPosts(parsed);
-      }
+      const raw = localStorage.getItem(STORAGE_KEY_POSTS);
+      if (raw) setPosts(JSON.parse(raw) as PostItem[]);
+    } catch {}
+    try {
+      const rawS = localStorage.getItem(STORAGE_KEY_STORIES);
+      if (rawS) setStories(JSON.parse(rawS) as StoryItem[]);
     } catch {}
   }, []);
 
   useEffect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
-    } catch {}
+    try { localStorage.setItem(STORAGE_KEY_POSTS, JSON.stringify(posts)); } catch {}
   }, [posts]);
+
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY_STORIES, JSON.stringify(stories)); } catch {}
+  }, [stories]);
 
   const addPost = useCallback<CommunityContextValue['addPost']>((input) => {
     if (!currentUser) return { approved: false, reason: 'Not authenticated' };
-
     const approved = isEnvironmentalContent(input.caption, input.tags);
     const newPost: PostItem = {
       id: `${Date.now()}_${Math.random().toString(36).slice(2)}`,
@@ -131,12 +145,26 @@ export const CommunityProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     setPosts(prev => prev.map(p => p.id === postId ? { ...p, comments: [...p.comments, comment] } : p));
   }, [currentUser]);
 
+  const addStory = useCallback<CommunityContextValue['addStory']>((input) => {
+    if (!currentUser) return;
+    const story: StoryItem = {
+      id: `${Date.now()}_${Math.random().toString(36).slice(2)}`,
+      user: currentUser,
+      mediaUrl: input.mediaUrl,
+      caption: input.caption,
+      createdAt: new Date().toISOString(),
+    };
+    setStories(prev => [story, ...prev.filter(s => s.user.id !== currentUser.id)]);
+  }, [currentUser]);
+
   const value: CommunityContextValue = {
     posts,
+    stories,
     addPost,
     likePost,
     unlikePost,
     addComment,
+    addStory,
     currentUser,
   };
 
