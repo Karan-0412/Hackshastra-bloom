@@ -1,16 +1,18 @@
 import React, { useMemo } from 'react';
 import CreatePost from './CreatePost';
 import PostCard from './PostCard';
+import StoriesBar from './StoriesBar';
 import { useCommunity } from '@/contexts/CommunityContext';
 
 const CommunityFeed: React.FC = () => {
-  const { posts, currentUser } = useCommunity();
+  const { posts } = useCommunity();
   const feed = useMemo(() => posts
     .filter(p => p.approved)
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt)), [posts]);
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <div className="mx-auto w-full max-w-xl space-y-6">
+      <StoriesBar />
       <CreatePost />
       {feed.length === 0 ? (
         <div className="text-center text-muted-foreground py-12">No posts yet. Be the first to share your eco-action!</div>
