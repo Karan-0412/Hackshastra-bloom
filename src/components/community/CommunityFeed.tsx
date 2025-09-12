@@ -16,7 +16,7 @@ const CommunityFeed: React.FC = () => {
   return (
     <div className="mx-auto w-full max-w-6xl">
       <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-8">
-        <div className="max-w-xl w-full mx-auto space-y-6">
+        <div className="max-w-[614px] w-full mx-auto space-y-6">
           <StoriesBar onSelect={(id) => { setViewerStart(id); setViewerOpen(true); }} />
           {feed.length === 0 ? (
             <div className="text-center text-muted-foreground py-12">No posts yet. Be the first to share your eco-action!</div>
