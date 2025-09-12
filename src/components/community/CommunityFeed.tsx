@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
-import CreatePost from './CreatePost';
 import PostCard from './PostCard';
 import StoriesBar from './StoriesBar';
+import CommunityRightSidebar from './CommunityRightSidebar';
 import { useCommunity } from '@/contexts/CommunityContext';
 
 const CommunityFeed: React.FC = () => {
