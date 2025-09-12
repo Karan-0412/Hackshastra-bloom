@@ -314,9 +314,12 @@ const Dashboard: React.FC = () => {
               </div>
               
               {/* User Avatar */}
-              <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                <span className="text-gray-600 text-sm font-medium">K</span>
-              </div>
+              <button type="button" onClick={() => setActiveTab('profile')} className="focus:outline-none">
+                <Avatar className="h-8 w-8 cursor-pointer ring-2 ring-white">
+                  <AvatarImage src="" alt={profile?.full_name || 'Profile'} />
+                  <AvatarFallback>{(profile?.full_name?.[0] || 'U').toUpperCase()}</AvatarFallback>
+                </Avatar>
+              </button>
               
               {/* Logout Button */}
               <Button
