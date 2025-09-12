@@ -274,31 +274,31 @@ const Dashboard: React.FC = () => {
                 <TabsList className="bg-slate-100/80 border rounded-full p-1 shadow-inner backdrop-blur supports-[backdrop-filter]:bg-slate-100/60 [&>button]:rounded-none [&>button]:first:rounded-l-full [&>button]:last:rounded-r-full [&>button]:not(:first-child):not(:last-child):rounded-none">
                   <TabsTrigger 
                     value="dashboard" 
-                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-white/60 rounded-full transition-colors data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow data-[state=active]:ring-1 data-[state=active]:ring-slate-200"
+                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Dashboard
                   </TabsTrigger>
                   <TabsTrigger 
                     value="lessons" 
-                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-white/60 rounded-full transition-colors data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow data-[state=active]:ring-1 data-[state=active]:ring-slate-200"
+                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Lessons
                   </TabsTrigger>
                   <TabsTrigger 
                     value="challenges" 
-                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-white/60 rounded-full transition-colors data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow data-[state=active]:ring-1 data-[state=active]:ring-slate-200"
+                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Challenges
                   </TabsTrigger>
                   <TabsTrigger 
                     value="community" 
-                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-white/60 rounded-full transition-colors data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow data-[state=active]:ring-1 data-[state=active]:ring-slate-200"
+                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     Community
                   </TabsTrigger>
                   <TabsTrigger 
                     value="news" 
-                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-white/60 rounded-full transition-colors data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow data-[state=active]:ring-1 data-[state=active]:ring-slate-200"
+                    className="px-5 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200/60 rounded-full transition-colors data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
                     News
                   </TabsTrigger>
