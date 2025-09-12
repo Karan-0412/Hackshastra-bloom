@@ -36,7 +36,7 @@ const StoryViewer: React.FC<{ open: boolean; onOpenChange: (v: boolean) => void;
             </div>
             <div className="relative bg-black">
               {/* eslint-disable-next-line jsx-a11y/alt-text */}
-              {current.mediaUrl.startsWith('data:video') ? (
+              {/\.(mp4|webm|ogg)(\?.*)?$/i.test(current.mediaUrl) || current.mediaUrl.startsWith('data:video') ? (
                 <video src={current.mediaUrl} controls className="w-full max-h-[70vh] mx-auto" />
               ) : (
                 <img src={current.mediaUrl} alt={current.caption || ''} className="w-full max-h-[70vh] object-contain mx-auto" />
