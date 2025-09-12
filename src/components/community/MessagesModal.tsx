@@ -216,7 +216,7 @@ const MessagesModal: React.FC<{ open: boolean; onOpenChange: (v: boolean) => voi
                 const first = people[0]?.id || null;
                 if (first) setSelected(first);
               }}
-              className="absolute ml-[280px] mt-[calc(70vh-64px)] h-10 w-10 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg hover:bg-blue-700"
+              className="absolute bottom-4 right-4 h-10 w-10 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg hover:bg-blue-700"
               aria-label="New chat"
             >
               +
