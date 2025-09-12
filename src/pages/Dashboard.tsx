@@ -480,9 +480,8 @@ const Dashboard: React.FC = () => {
           </TabsContent>
 
           <TabsContent value="community" className="mt-6">
-            <div className="text-center py-12">
-              <h3 className="text-xl font-semibold text-blue-900 mb-2">Community Coming Soon</h3>
-              <p className="text-blue-600">Connect with other environmental learners and share your progress.</p>
+            <div className="max-w-6xl mx-auto">
+              <CommunityFeed />
             </div>
           </TabsContent>
 
