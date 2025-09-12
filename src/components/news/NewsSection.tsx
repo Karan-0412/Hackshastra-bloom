@@ -4,10 +4,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { 
-  Search, 
-  Clock, 
-  ExternalLink, 
+import {
+  Search,
+  Clock,
+  ExternalLink,
   Filter,
   TrendingUp,
   Globe,
@@ -15,7 +15,9 @@ import {
   Zap,
   Recycle,
   TreePine,
-  RefreshCw
+  RefreshCw,
+  Hash,
+  Facebook
 } from 'lucide-react';
 import { NewsArticle, NEWS_CATEGORIES, newsService } from '@/services/newsService';
 
