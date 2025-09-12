@@ -177,7 +177,7 @@ const MessagesModal: React.FC<{ open: boolean; onOpenChange: (v: boolean) => voi
         </DialogHeader>
         <div className="grid grid-cols-[320px_minmax(0,1fr)] h-[70vh] gap-0">
           {/* Left: Contacts */}
-          <div className="border-r flex flex-col">
+          <div className="relative border-r flex flex-col">
             <div className="p-4 pb-2">
               <div className="text-lg font-semibold">Chats</div>
               <div className="mt-2">
