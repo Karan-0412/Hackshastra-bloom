@@ -1,7 +1,7 @@
 /* Custom styles to make the app look more authentic and less AI-generated */
 
 /* Custom font imports for a more personal feel */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Merriweather:wght@300;400;700&display=swap');
 
 /* Root variables for consistent theming */
 :root {
@@ -122,15 +122,16 @@
 
 /* Custom typography */
 .custom-heading {
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .custom-body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
   font-weight: 400;
   line-height: 1.6;
+  font-size: 1rem;
 }
 
 /* Custom emoji styling */

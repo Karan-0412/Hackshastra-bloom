@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,6 +11,8 @@ import { useProfile } from '@/hooks/useProfile';
 import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
+import { newsService } from '@/services/newsService';
 import CustomEcoTree from '@/components/tree/CustomEcoTree';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import EnvironmentalQuiz from '@/components/quiz/EnvironmentalQuiz';
@@ -22,7 +24,6 @@ import NewsSection from '@/components/news/NewsSection';
 import GameModal from '@/components/rpg/GameModal';
 import Profile from '@/components/profile/Profile';
 import CommunityFeed from '@/components/community/CommunityFeed';
-import DiscoverFeed from '@/components/community/DiscoverFeed';
 import { QuizModule } from '@/data/quizData';
 import { Challenge, getUnlockedChallenges } from '@/data/challenges';
 import { Lesson } from '@/data/lessons';
@@ -101,6 +102,30 @@ const ActivityBars: React.FC = () => {
 
 const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [specials, setSpecials] = useState<{ title: string; url: string }[]>([]);
+  const [tipOfDay, setTipOfDay] = useState('');
+
+  useEffect(() => {
+    // Load a few trending articles to show as highlights
+    (async () => {
+      try {
+        const t = await newsService.getTrendingNews(3);
+        setSpecials(t.map(a => ({ title: a.title, url: a.url })));
+      } catch (e) { setSpecials([]); }
+    })();
+
+    // Simple tip of the day
+    const tips = [
+      'Take a short walk and pick up any litter you find.',
+      'Plant a native tree or shrub in your community.',
+      'Reduce single-use plastics today: bring a reusable bottle.',
+      'Support local conservation groups — volunteer or donate.',
+      'Learn about composting and start a small compost bin.',
+      'Switch off unused lights and save energy tonight.',
+      'Share an environmental article with a friend.'
+    ];
+    setTipOfDay(tips[new Date().getDay()] || tips[0]);
+  }, []);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [selectedModule, setSelectedModule] = useState<QuizModule | null>(null);
   const [showQuiz, setShowQuiz] = useState(false);
@@ -299,12 +324,6 @@ const Dashboard: React.FC = () => {
                     Community
                   </TabsTrigger>
                   <TabsTrigger
-                    value="discover"
-                    className="px-5 py-2 text-[13px] font-medium text-slate-600 rounded-full transition-all duration-300 ease-out hover:bg-slate-200/60 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
-                  >
-                    Discover
-                  </TabsTrigger>
-                  <TabsTrigger
                     value="news"
                     className="px-5 py-2 text-[13px] font-medium text-slate-600 rounded-full transition-all duration-300 ease-out hover:bg-slate-200/60 data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-0"
                   >
@@ -317,9 +336,24 @@ const Dashboard: React.FC = () => {
             {/* Right Section - User Actions */}
             <div className="flex items-center space-x-4">
               {/* Calendar Icon */}
-              <div className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-900 cursor-pointer">
-                <Calendar className="w-5 h-5" />
-              </div>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-900 cursor-pointer">
+                    <Calendar className="w-5 h-5" />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-72 p-3">
+                  <div className="text-sm font-semibold mb-2">What's special today</div>
+                  <div className="text-xs text-muted-foreground mb-3">{tipOfDay}</div>
+                  <div className="space-y-2">
+                    {specials.length > 0 ? specials.map(s => (
+                      <a key={s.url} href={s.url} target="_blank" rel="noreferrer" className="block text-sm text-slate-700 hover:underline">{s.title}</a>
+                    )) : (
+                      <div className="text-xs text-muted-foreground">No highlights today.</div>
+                    )}
+                  </div>
+                </PopoverContent>
+              </Popover>
               
               {/* User Avatar */}
               <button type="button" onClick={() => setActiveTab('profile')} className="focus:outline-none">
@@ -493,11 +527,6 @@ const Dashboard: React.FC = () => {
             </div>
           </TabsContent>
 
-          <TabsContent value="discover" className="mt-6">
-            <div className="max-w-6xl mx-auto">
-              <DiscoverFeed />
-            </div>
-          </TabsContent>
 
           <TabsContent value="news" className="mt-6">
             <div className="max-w-6xl mx-auto">
