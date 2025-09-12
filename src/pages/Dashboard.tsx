@@ -263,7 +263,7 @@ const Dashboard: React.FC = () => {
               <div className="w-7 h-7 bg-black rounded-lg flex items-center justify-center">
                 <span className="text-white font-semibold text-[13px] leading-none">E</span>
               </div>
-              <h1 className="text-[13px] font-medium text-gray-800">
+              <h1 className="text-[14px] font-medium text-gray-800">
                 EcoEdu Punjab
               </h1>
             </div>
