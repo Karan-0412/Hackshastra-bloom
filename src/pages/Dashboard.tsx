@@ -271,7 +271,7 @@ const Dashboard: React.FC = () => {
             {/* Centered Navigation */}
             <div className="flex-1 flex justify-center">
               <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="bg-gray-100 rounded-full p-0.5 [&>button]:rounded-none [&>button]:first:rounded-l-full [&>button]:last:rounded-r-full [&>button]:not(:first-child):not(:last-child):rounded-none">
+                <TabsList className="bg-slate-100/80 border rounded-full p-1 shadow-inner backdrop-blur supports-[backdrop-filter]:bg-slate-100/60 [&>button]:rounded-none [&>button]:first:rounded-l-full [&>button]:last:rounded-r-full [&>button]:not(:first-child):not(:last-child):rounded-none">
                   <TabsTrigger 
                     value="dashboard" 
                     className="data-[state=active]:bg-black data-[state=active]:text-white data-[state=active]:shadow-sm px-6 py-2 transition-all duration-300 ease-in-out hover:bg-gray-200"
