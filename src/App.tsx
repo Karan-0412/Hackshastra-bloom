@@ -22,26 +22,28 @@ const App = () => {
       <AuthProvider>
         <ProgressProvider>
           <LessonProgressionProvider>
-            <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <CommunityProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/profile/avatar" element={
-                    // lazy loaded page route
-                    <React.Suspense fallback={<div className="p-6">Loading...</div>}>
-                      <AvatarPickerPage />
-                    </React.Suspense>
-                  } />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </BrowserRouter>
-            </CommunityProvider>
-            </TooltipProvider>
+            <ToastProvider>
+              <TooltipProvider>
+                <Toaster />
+                <Sonner />
+                <CommunityProvider>
+                  <BrowserRouter>
+                    <Routes>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/dashboard" element={<Dashboard />} />
+                      <Route path="/profile/avatar" element={
+                        // lazy loaded page route
+                        <React.Suspense fallback={<div className="p-6">Loading...</div>}>
+                          <AvatarPickerPage />
+                        </React.Suspense>
+                      } />
+                      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </BrowserRouter>
+                </CommunityProvider>
+              </TooltipProvider>
+            </ToastProvider>
           </LessonProgressionProvider>
         </ProgressProvider>
       </AuthProvider>
