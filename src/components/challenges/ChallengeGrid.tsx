@@ -63,24 +63,24 @@ export default function ChallengeGrid({
       {/* Header */}
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Environmental Challenges</h2>
-          <p className="text-gray-600">Complete challenges to grow your eco-tree and earn rewards!</p>
+          <h2 className="text-2xl font-bold text-slate-900">Environmental Challenges</h2>
+          <p className="text-sm text-muted-foreground">Complete challenges to grow your eco-tree and earn rewards!</p>
         </div>
-        
-        <div className="flex items-center gap-2">
+
+        <div className="flex items-center gap-3">
           <Badge variant="outline" className="text-sm">
             Level {userLevel}
           </Badge>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 bg-muted rounded-lg p-1">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded-md ${viewMode === 'grid' ? 'bg-blue-100 text-blue-600' : 'text-gray-400'}`}
+              className={`p-2 rounded-md ${viewMode === 'grid' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'}`}
             >
               <Grid className="w-4 h-4" />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`p-2 rounded-md ${viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'text-gray-400'}`}
+              className={`p-2 rounded-md ${viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'}`}
             >
               <List className="w-4 h-4" />
             </button>
@@ -91,7 +91,7 @@ export default function ChallengeGrid({
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
           <Input
             placeholder="Search challenges..."
             value={searchTerm}
@@ -99,7 +99,7 @@ export default function ChallengeGrid({
             className="pl-10"
           />
         </div>
-        
+
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
           <SelectTrigger className="w-full sm:w-48">
             <SelectValue placeholder="Category" />
@@ -112,7 +112,7 @@ export default function ChallengeGrid({
             ))}
           </SelectContent>
         </Select>
-        
+
         <Select value={selectedDifficulty} onValueChange={setSelectedDifficulty}>
           <SelectTrigger className="w-full sm:w-32">
             <SelectValue placeholder="Difficulty" />
