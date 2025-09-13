@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ProgressProvider } from "./contexts/ProgressContext";
+import { LessonProgressionProvider } from './contexts/LessonProgressionContext';
 import HomePage from "./pages/HomePage";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
