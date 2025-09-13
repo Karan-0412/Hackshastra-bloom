@@ -58,20 +58,22 @@ export default function LessonDetailModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gradient-to-br from-white to-white/60 rounded-2xl shadow-xl">
         <DialogHeader>
-          <div className="flex items-center gap-3">
-            {getLessonTypeIcon(lesson.type)}
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-blue-700 shadow-sm">
+              {getLessonTypeIcon(lesson.type)}
+            </div>
             <div>
-              <DialogTitle className="text-2xl">{lesson.title}</DialogTitle>
-              <DialogDescription className="text-base">
+              <DialogTitle className="text-2xl font-semibold text-slate-900">{lesson.title}</DialogTitle>
+              <DialogDescription className="text-base text-slate-600">
                 {lesson.description}
               </DialogDescription>
             </div>
           </div>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-6 p-4">
           {/* Lesson Info */}
           <div className="flex flex-wrap gap-2">
             <Badge className={getDifficultyColor(lesson.difficulty)}>
@@ -91,27 +93,27 @@ export default function LessonDetailModal({
           </div>
 
           {/* Content */}
-          <Card>
+          <Card className="rounded-xl border border-gray-100 shadow-sm">
             <CardContent className="pt-4">
-              <h3 className="font-semibold mb-3">Lesson Content</h3>
-              <div className="prose prose-sm max-w-none">
-                <p className="text-gray-700">{lesson.content}</p>
+              <h3 className="font-semibold mb-3 text-slate-900">Lesson Content</h3>
+              <div className="prose prose-sm max-w-none text-slate-700">
+                <p>{lesson.content}</p>
               </div>
             </CardContent>
           </Card>
 
           {/* Resources */}
           {Object.keys(lesson.resources).length > 0 && (
-            <Card>
+            <Card className="rounded-xl border border-gray-100 shadow-sm">
               <CardContent className="pt-4">
-                <h3 className="font-semibold mb-3">Resources</h3>
+                <h3 className="font-semibold mb-3 text-slate-900">Resources</h3>
                 <div className="space-y-2">
                   {lesson.resources.videos && lesson.resources.videos.length > 0 && (
                     <div>
-                      <h4 className="text-sm font-medium text-gray-700 mb-1">Videos</h4>
+                      <h4 className="text-sm font-medium text-slate-700 mb-1">Videos</h4>
                       <div className="space-y-1">
                         {lesson.resources.videos.map((video, index) => (
-                          <div key={index} className="text-sm text-blue-600 hover:underline cursor-pointer">
+                          <div key={index} className="text-sm text-primary hover:underline cursor-pointer">
                             📹 {video}
                           </div>
                         ))}
@@ -121,10 +123,10 @@ export default function LessonDetailModal({
                   
                   {lesson.resources.articles && lesson.resources.articles.length > 0 && (
                     <div>
-                      <h4 className="text-sm font-medium text-gray-700 mb-1">Articles</h4>
+                      <h4 className="text-sm font-medium text-slate-700 mb-1">Articles</h4>
                       <div className="space-y-1">
                         {lesson.resources.articles.map((article, index) => (
-                          <div key={index} className="text-sm text-blue-600 hover:underline cursor-pointer">
+                          <div key={index} className="text-sm text-primary hover:underline cursor-pointer">
                             📄 {article}
                           </div>
                         ))}
@@ -134,10 +136,10 @@ export default function LessonDetailModal({
 
                   {lesson.resources.activities && lesson.resources.activities.length > 0 && (
                     <div>
-                      <h4 className="text-sm font-medium text-gray-700 mb-1">Activities</h4>
+                      <h4 className="text-sm font-medium text-slate-700 mb-1">Activities</h4>
                       <div className="space-y-1">
                         {lesson.resources.activities.map((activity, index) => (
-                          <div key={index} className="text-sm text-blue-600 hover:underline cursor-pointer">
+                          <div key={index} className="text-sm text-primary hover:underline cursor-pointer">
                             🎯 {activity}
                           </div>
                         ))}
@@ -147,10 +149,10 @@ export default function LessonDetailModal({
 
                   {lesson.resources.quizzes && lesson.resources.quizzes.length > 0 && (
                     <div>
-                      <h4 className="text-sm font-medium text-gray-700 mb-1">Quizzes</h4>
+                      <h4 className="text-sm font-medium text-slate-700 mb-1">Quizzes</h4>
                       <div className="space-y-1">
                         {lesson.resources.quizzes.map((quiz, index) => (
-                          <div key={index} className="text-sm text-blue-600 hover:underline cursor-pointer">
+                          <div key={index} className="text-sm text-primary hover:underline cursor-pointer">
                             ❓ {quiz}
                           </div>
                         ))}
@@ -164,7 +166,7 @@ export default function LessonDetailModal({
 
           {/* Tags */}
           <div className="space-y-2">
-            <h3 className="font-semibold text-sm">Tags</h3>
+            <h3 className="font-semibold text-sm text-slate-900">Tags</h3>
             <div className="flex flex-wrap gap-1">
               {lesson.tags.map((tag, index) => (
                 <Badge key={index} variant="secondary" className="text-xs">
@@ -177,7 +179,7 @@ export default function LessonDetailModal({
           {/* Action Buttons */}
           <div className="flex gap-3 pt-4">
             {isCompleted ? (
-              <Button disabled className="flex-1 bg-green-100 text-green-800">
+              <Button disabled className="flex-1 bg-emerald-100 text-emerald-800">
                 <CheckCircle className="w-4 h-4 mr-2" />
                 Completed
               </Button>
@@ -188,7 +190,7 @@ export default function LessonDetailModal({
                 </Button>
                 <Button 
                   onClick={handleComplete}
-                  className="flex-1 bg-blue-600 hover:bg-blue-700"
+                  className="flex-1 bg-primary hover:bg-primary/90 text-white"
                 >
                   <Play className="w-4 h-4 mr-2" />
                   Complete Lesson
