@@ -20,7 +20,8 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <ProgressProvider>
-          <TooltipProvider>
+          <LessonProgressionProvider>
+            <TooltipProvider>
             <Toaster />
             <Sonner />
             <CommunityProvider>
@@ -39,7 +40,8 @@ const App = () => {
                 </Routes>
               </BrowserRouter>
             </CommunityProvider>
-          </TooltipProvider>
+            </TooltipProvider>
+          </LessonProgressionProvider>
         </ProgressProvider>
       </AuthProvider>
     </QueryClientProvider>
