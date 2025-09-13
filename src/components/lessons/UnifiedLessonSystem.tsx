@@ -193,7 +193,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
       {/* Level Navigation */}
       <div className={`bg-gradient-to-r ${
         showNextLevel ? 'from-green-600 to-teal-600' : 'from-blue-600 to-green-600'
-      } text-white p-4 rounded-lg mb-6`}>
+      } text-white p-4 rounded-lg mb-6 shadow-md`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="text-4xl">{showNextLevel ? '♻️' : '🌍'}</div>
@@ -235,13 +235,13 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
 
       {/* View Toggle */}
       <div className="flex justify-center mb-8">
-        <div className="bg-blue-50 rounded-lg p-1 border border-blue-200">
+        <div className="bg-blue-50 rounded-lg p-1 border border-blue-200 shadow-sm">
           <div className="flex space-x-1">
             <button
               onClick={() => setActiveView('traditional')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
                 activeView === 'traditional'
-                  ? 'bg-blue-500 text-white shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-sm' 
                   : 'text-blue-600 hover:bg-blue-100'
               }`}
             >
@@ -252,7 +252,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
               onClick={() => setActiveView('rpg')}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-2 ${
                 activeView === 'rpg'
-                  ? 'bg-blue-500 text-white shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-sm' 
                   : 'text-blue-600 hover:bg-blue-100'
               }`}
             >
@@ -269,7 +269,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
           {/* Level Information */}
           <Card className={`bg-gradient-to-r ${
             showNextLevel ? 'from-green-50 to-teal-50 border-green-200' : 'from-blue-50 to-green-50 border-blue-200'
-          }`}>
+          } shadow-sm rounded-xl`}>
             <CardContent className="p-6">
               <div className="text-center">
                 <h3 className={`text-xl font-bold mb-3 ${
@@ -286,7 +286,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                   }
                 </p>
                 <div className="grid grid-cols-3 gap-4 text-center">
-                  <div className="bg-white/50 rounded-lg p-3">
+                  <div className="bg-white/60 rounded-lg p-3 shadow-inner">
                     <div className={`text-2xl font-bold ${
                       showNextLevel ? 'text-green-600' : 'text-blue-600'
                     }`}>
@@ -298,7 +298,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                       Lessons
                     </div>
                   </div>
-                  <div className="bg-white/50 rounded-lg p-3">
+                  <div className="bg-white/60 rounded-lg p-3 shadow-inner">
                     <div className={`text-2xl font-bold ${
                       showNextLevel ? 'text-green-600' : 'text-blue-600'
                     }`}>
@@ -310,7 +310,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                       Total Points
                     </div>
                   </div>
-                  <div className="bg-white/50 rounded-lg p-3">
+                  <div className="bg-white/60 rounded-lg p-3 shadow-inner">
                     <div className={`text-2xl font-bold ${
                       showNextLevel ? 'text-green-600' : 'text-blue-600'
                     }`}>
@@ -331,27 +331,28 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
               const isExpanded = expandedModule === module.id;
 
               return (
-                <Card key={module.id} className="bg-white border-blue-200 hover:shadow-lg transition-shadow">
+                <Card key={module.id} className="bg-white border border-gray-100 shadow-sm rounded-2xl transition-transform hover:-translate-y-1">
                   <CardHeader>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-4">
                         <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
-                          module.color === 'red' ? 'bg-red-100' :
-                          module.color === 'green' ? 'bg-green-100' :
-                          module.color === 'yellow' ? 'bg-yellow-100' :
+                          module.color === 'red' ? 'bg-red-50' :
+                          module.color === 'green' ? 'bg-green-50' :
+                          module.color === 'yellow' ? 'bg-yellow-50' :
                           'bg-gray-100'
                         }`}>
                           {module.icon}
                         </div>
                         <div>
-                          <CardTitle className="text-xl text-blue-900">{module.title}</CardTitle>
-                          <p className="text-blue-600 text-sm">{module.description}</p>
+                          <CardTitle className="text-lg font-semibold text-slate-900">{module.title}</CardTitle>
+                          <p className="text-sm text-muted-foreground">{module.description}</p>
                         </div>
                       </div>
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => setExpandedModule(isExpanded ? null : module.id)}
+                        className="border-gray-200 bg-white/50 hover:bg-white"
                       >
                         {isExpanded ? 'Hide Lessons' : 'Show Lessons'}
                       </Button>
@@ -359,14 +360,14 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                     
                     <div className="mt-4">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm font-medium text-blue-700">Progress</span>
-                        <span className="text-sm text-blue-600">
+                        <span className="text-sm font-medium text-slate-700">Progress</span>
+                        <span className="text-sm text-slate-500">
                           {updatedModule?.completedLessons || 0}/{updatedModule?.totalLessons || 0} lessons
                         </span>
                       </div>
                       <Progress 
                         value={updatedModule?.progress || 0} 
-                        className="h-3"
+                        className="h-3 bg-slate-100 rounded-full"
                       />
                     </div>
                   </CardHeader>
@@ -388,22 +389,22 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                             <div key={lesson.id} className="space-y-3">
                               {/* Lesson Card */}
                               <div
-                                className={`p-4 rounded-lg border transition-all ${
+                                className={`p-4 md:p-5 rounded-xl border transition-all shadow-sm ${
                                   isCompleted 
-                                    ? 'bg-green-50 border-green-200' 
+                                    ? 'bg-emerald-50 border-emerald-100 ring-1 ring-emerald-100' 
                                     : isLocked 
                                       ? 'bg-gray-50 border-gray-200 opacity-60' 
-                                      : 'bg-blue-50 border-blue-200 hover:bg-blue-100'
+                                      : 'bg-white border-gray-100 hover:shadow-md hover:scale-[1.01]'
                                 }`}
                               >
                                 <div className="flex items-center justify-between">
                                   <div className="flex items-center space-x-3">
-                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                                       isCompleted 
                                         ? 'bg-green-500 text-white' 
                                         : isLocked 
                                           ? 'bg-gray-300 text-gray-500' 
-                                          : 'bg-blue-500 text-white'
+                                          : 'bg-primary text-white'
                                     }`}>
                                       {isCompleted ? (
                                         <CheckCircle className="w-4 h-4" />
@@ -418,7 +419,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                                       <div className="flex items-center space-x-2 mb-1">
                                         <h4 className={`font-semibold ${
                                           isCompleted ? 'text-green-800' : 
-                                          isLocked ? 'text-gray-500' : 'text-blue-900'
+                                          isLocked ? 'text-gray-500' : 'text-slate-900'
                                         }`}>
                                           {lesson.title}
                                         </h4>
@@ -434,20 +435,20 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                                       </div>
                                       <p className={`text-sm ${
                                         isCompleted ? 'text-green-600' : 
-                                        isLocked ? 'text-gray-400' : 'text-blue-600'
+                                        isLocked ? 'text-gray-400' : 'text-slate-600'
                                       }`}>
                                         {lesson.description}
                                       </p>
                                     </div>
                                   </div>
 
-                                  <div className="flex items-center space-x-2">
+                                  <div className="flex items-center space-x-3">
                                     <div className="text-right">
-                                      <div className="flex items-center text-xs text-blue-600 mb-1">
+                                      <div className="flex items-center text-xs text-slate-500 mb-1">
                                         <Clock className="w-3 h-3 mr-1" />
                                         {lesson.duration}min
                                       </div>
-                                      <div className="flex items-center text-xs text-blue-600">
+                                      <div className="flex items-center text-xs text-slate-600">
                                         <Star className="w-3 h-3 mr-1" />
                                         {lesson.points} pts
                                       </div>
@@ -460,10 +461,10 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                                         disabled={isLocked || isCompleted}
                                         className={
                                           isCompleted 
-                                            ? 'bg-green-100 text-green-800 cursor-not-allowed' 
+                                            ? 'bg-emerald-100 text-emerald-800 cursor-not-allowed' 
                                             : isLocked 
                                               ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                                              : 'bg-blue-600 hover:bg-blue-700'
+                                              : 'bg-primary hover:bg-primary/90 text-white'
                                         }
                                       >
                                         {isCompleted ? (
@@ -517,7 +518,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
           {/* Story Section */}
           <Card className={`bg-gradient-to-r ${
             showNextLevel ? 'from-green-50 to-teal-50 border-green-200' : 'from-blue-50 to-green-50 border-blue-200'
-          }`}>
+          } shadow-sm rounded-xl`}>
             <CardContent className="p-6">
               <div className="text-center">
                 <h3 className={`text-xl font-bold mb-3 ${
@@ -533,7 +534,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                     : "Welcome to the Climate Change realm! Punjab's environment is under threat from rising temperatures, changing weather patterns, and extreme events. As an environmental hero, you must master the fundamentals of climate science to protect our beautiful state."
                   }
                 </p>
-                <div className="bg-white/50 rounded-lg p-4 mb-4">
+                <div className="bg-white/60 rounded-lg p-4 mb-4 shadow-inner">
                   <p className={`text-sm italic ${
                     showNextLevel ? 'text-green-600' : 'text-blue-600'
                   }`}>
@@ -573,26 +574,26 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
               return (
                 <Card key={level.id} className={`bg-white border-2 transition-all ${
                   canAccess 
-                    ? 'border-blue-200 hover:shadow-lg' 
-                    : 'border-gray-200 opacity-60'
+                    ? 'border-blue-100 shadow-sm rounded-2xl' 
+                    : 'border-gray-200 opacity-60 rounded-2xl'
                 }`}>
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-4">
                         <div className={`w-16 h-16 rounded-xl flex items-center justify-center text-3xl ${
-                          level.color === 'red' ? 'bg-red-100' :
-                          level.color === 'green' ? 'bg-green-100' :
-                          level.color === 'yellow' ? 'bg-yellow-100' :
+                          level.color === 'red' ? 'bg-red-50' :
+                          level.color === 'green' ? 'bg-green-50' :
+                          level.color === 'yellow' ? 'bg-yellow-50' :
                           'bg-gray-100'
                         }`}>
                           {level.icon}
                         </div>
                         <div>
-                          <CardTitle className="text-2xl text-blue-900 flex items-center gap-2">
+                          <CardTitle className="text-2xl text-slate-900 flex items-center gap-2">
                             {level.title}
                             {!canAccess && <Lock className="w-5 h-5 text-gray-400" />}
                           </CardTitle>
-                          <p className="text-blue-600">{level.description}</p>
+                          <p className="text-slate-600">{level.description}</p>
                           <p className="text-sm text-gray-500 italic">{level.theme}</p>
                         </div>
                       </div>
@@ -614,7 +615,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                         </div>
                         <Progress 
                           value={updatedLevel?.progress || 0} 
-                          className="w-32 h-2 mt-1"
+                          className="w-32 h-2 mt-1 bg-slate-100 rounded-full"
                         />
                       </div>
                     </div>
@@ -623,7 +624,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                       <Button
                         variant="outline"
                         onClick={() => setExpandedLevel(isExpanded ? null : level.id)}
-                        className="w-full mt-4"
+                        className="w-full mt-4 border-gray-200 bg-white/50 hover:bg-white"
                       >
                         {isExpanded ? 'Hide Sub-Levels' : 'Show Sub-Levels'}
                       </Button>
@@ -640,9 +641,9 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                           return (
                             <Card key={subLevel.id} className={`border ${
                               canAccessSub 
-                                ? 'border-green-200 bg-green-50' 
+                                ? 'border-green-200 bg-green-50 shadow-sm' 
                                 : 'border-gray-200 bg-gray-50'
-                            }`}>
+                            } rounded-lg`}>
                               <CardHeader className="pb-3">
                                 <div className="flex items-center justify-between">
                                   <div className="flex items-center space-x-3">
@@ -683,7 +684,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                                             isGameCompleted 
                                               ? 'bg-green-100 border-green-300' 
                                               : canAccessThisGame 
-                                                ? 'bg-blue-50 border-blue-200 hover:bg-blue-100' 
+                                                ? 'bg-white border-gray-100 hover:shadow-md' 
                                                 : 'bg-gray-50 border-gray-200 opacity-60'
                                           }`}
                                         >
@@ -701,9 +702,9 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                                               )}
                                             </div>
                                           </div>
-                                          
+                                           
                                           <p className="text-xs text-gray-600 mb-2">{game.description}</p>
-                                          
+                                           
                                           <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
                                             <span>{game.duration}min</span>
                                             <span>{game.points} pts</span>
@@ -717,7 +718,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                                               isGameCompleted 
                                                 ? 'bg-green-100 text-green-800 cursor-not-allowed' 
                                                 : canAccessThisGame 
-                                                  ? 'bg-blue-600 hover:bg-blue-700' 
+                                                  ? 'bg-primary hover:bg-primary/90 text-white' 
                                                   : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                             }`}
                                           >
@@ -747,7 +748,7 @@ export default function UnifiedLessonSystem({ onStartLesson, onStartGame, onStar
                                   <div className="mt-4 pt-4 border-t border-gray-200">
                                     <div className={`p-4 rounded-lg border-2 ${
                                       canAccessBoss(level.boss.id, userProgress.completedGames || [])
-                                        ? 'border-purple-300 bg-purple-50' 
+                                        ? 'border-purple-300 bg-purple-50 shadow-sm' 
                                         : 'border-gray-200 bg-gray-50'
                                     }`}>
                                       <div className="flex items-center justify-between">
