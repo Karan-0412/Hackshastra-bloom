@@ -180,10 +180,10 @@ const RewardMap: React.FC = () => {
 
           <TabsContent value="lessons" className="space-y-6">
             {lessonRewards.map((category) => (
-              <div key={category.category} className={`p-4 rounded-lg border ${category.color}`}>
-                <div className="flex items-center space-x-2 mb-4">
-                  <span className="text-2xl">{category.icon}</span>
-                  <h3 className="text-xl font-bold">{category.category}</h3>
+              <div key={category.category} className={`p-6 rounded-lg border border-gray-100 bg-white/90`}>
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">{category.icon}</div>
+                  <h3 className="text-xl font-bold text-slate-900">{category.category}</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {category.rewards.map((reward) => renderRewardCard(reward, true))}
