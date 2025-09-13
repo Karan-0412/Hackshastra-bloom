@@ -21,17 +21,17 @@ const RewardMap: React.FC = () => {
   const [activeTab, setActiveTab] = useState('lessons');
 
   const itemIcons = {
-    water: <Droplets className="w-4 h-4 text-blue-500" />,
-    sunlight: <Sun className="w-4 h-4 text-yellow-500" />,
-    nutrients: <Leaf className="w-4 h-4 text-green-500" />,
-    fertilizer: <Sprout className="w-4 h-4 text-emerald-500" />,
-    love: <Heart className="w-4 h-4 text-red-500" />
+    water: <Droplets className="w-4 h-4 text-sky-500" />,
+    sunlight: <Sun className="w-4 h-4 text-amber-500" />,
+    nutrients: <Leaf className="w-4 h-4 text-emerald-500" />,
+    fertilizer: <Sprout className="w-4 h-4 text-emerald-700" />,
+    love: <Heart className="w-4 h-4 text-rose-500" />
   };
 
   const renderRewardItem = (item: string, amount: number) => (
-    <div key={item} className="flex items-center space-x-1">
+    <div key={item} className="flex items-center space-x-2 bg-transparent rounded px-2 py-1">
       {itemIcons[item as keyof typeof itemIcons]}
-      <span className="text-sm font-medium">{amount}</span>
+      <span className="text-sm font-medium text-slate-700">{amount}</span>
     </div>
   );
 
