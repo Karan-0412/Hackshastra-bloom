@@ -108,11 +108,11 @@ export default function LessonModule({ module, onStartLesson }: LessonModuleProp
               return (
                 <div
                   key={lesson.id}
-                  className={`p-4 rounded-lg border transition-all ${
-                    isCompleted 
-                      ? 'bg-green-50 border-green-200' 
-                      : isLocked 
-                        ? 'bg-gray-50 border-gray-200 opacity-60' 
+                  className={`p-6 rounded-2xl border transition-all ${
+                    isCompleted
+                      ? 'bg-green-50 border-green-200'
+                      : isLocked
+                        ? 'bg-gray-50 border-gray-200 opacity-70'
                         : 'bg-blue-50 border-blue-200 hover:bg-blue-100'
                   }`}
                 >
