@@ -107,16 +107,22 @@ const RewardMap: React.FC = () => {
   ];
 
   const renderRewardCard = (reward: any, showDifficulty = false) => (
-    <div key={reward.name} className="p-4 border rounded-lg bg-white hover:shadow-md transition-shadow">
-      <div className="flex items-center justify-between mb-3">
-        <h4 className="font-semibold text-gray-900">{reward.name}</h4>
+    <div key={reward.name} className="p-6 border rounded-2xl bg-white/90 hover:shadow-lg transition-shadow">
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600">{reward.icon || '🌟'}</div>
+          <div>
+            <h4 className="font-semibold text-slate-900">{reward.name}</h4>
+            <div className="text-xs text-muted-foreground">{reward.subtitle || ''}</div>
+          </div>
+        </div>
         {showDifficulty && (
           <Badge variant={reward.difficulty === 'Advanced' ? 'destructive' : reward.difficulty === 'Intermediate' ? 'default' : 'secondary'}>
             {reward.difficulty}
           </Badge>
         )}
       </div>
-      <div className="grid grid-cols-2 gap-2 mb-3">
+      <div className="grid grid-cols-2 gap-3 mb-4">
         {reward.water > 0 && renderRewardItem('water', reward.water)}
         {reward.sunlight > 0 && renderRewardItem('sunlight', reward.sunlight)}
         {reward.nutrients > 0 && renderRewardItem('nutrients', reward.nutrients)}
@@ -124,7 +130,7 @@ const RewardMap: React.FC = () => {
         {reward.love > 0 && renderRewardItem('love', reward.love)}
       </div>
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-1 text-yellow-600">
+        <div className="flex items-center gap-2 text-yellow-600">
           <Zap className="w-4 h-4" />
           <span className="text-sm font-medium">{reward.xp} XP</span>
         </div>
