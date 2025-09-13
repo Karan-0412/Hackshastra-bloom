@@ -21,17 +21,17 @@ const RewardMap: React.FC = () => {
   const [activeTab, setActiveTab] = useState('lessons');
 
   const itemIcons = {
-    water: <Droplets className="w-4 h-4 text-blue-500" />,
-    sunlight: <Sun className="w-4 h-4 text-yellow-500" />,
-    nutrients: <Leaf className="w-4 h-4 text-green-500" />,
-    fertilizer: <Sprout className="w-4 h-4 text-emerald-500" />,
-    love: <Heart className="w-4 h-4 text-red-500" />
+    water: <Droplets className="w-4 h-4 text-sky-500" />,
+    sunlight: <Sun className="w-4 h-4 text-amber-500" />,
+    nutrients: <Leaf className="w-4 h-4 text-emerald-500" />,
+    fertilizer: <Sprout className="w-4 h-4 text-emerald-700" />,
+    love: <Heart className="w-4 h-4 text-rose-500" />
   };
 
   const renderRewardItem = (item: string, amount: number) => (
-    <div key={item} className="flex items-center space-x-1">
+    <div key={item} className="flex items-center space-x-2 bg-transparent rounded px-2 py-1">
       {itemIcons[item as keyof typeof itemIcons]}
-      <span className="text-sm font-medium">{amount}</span>
+      <span className="text-sm font-medium text-slate-700">{amount}</span>
     </div>
   );
 
@@ -107,16 +107,22 @@ const RewardMap: React.FC = () => {
   ];
 
   const renderRewardCard = (reward: any, showDifficulty = false) => (
-    <div key={reward.name} className="p-4 border rounded-lg bg-white hover:shadow-md transition-shadow">
-      <div className="flex items-center justify-between mb-3">
-        <h4 className="font-semibold text-gray-900">{reward.name}</h4>
+    <div key={reward.name} className="p-6 border rounded-2xl bg-white/90 hover:shadow-lg transition-shadow">
+      <div className="flex items-start justify-between mb-3">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600">{reward.icon || '🌟'}</div>
+          <div>
+            <h4 className="font-semibold text-slate-900">{reward.name}</h4>
+            <div className="text-xs text-muted-foreground">{reward.subtitle || ''}</div>
+          </div>
+        </div>
         {showDifficulty && (
           <Badge variant={reward.difficulty === 'Advanced' ? 'destructive' : reward.difficulty === 'Intermediate' ? 'default' : 'secondary'}>
             {reward.difficulty}
           </Badge>
         )}
       </div>
-      <div className="grid grid-cols-2 gap-2 mb-3">
+      <div className="grid grid-cols-2 gap-3 mb-4">
         {reward.water > 0 && renderRewardItem('water', reward.water)}
         {reward.sunlight > 0 && renderRewardItem('sunlight', reward.sunlight)}
         {reward.nutrients > 0 && renderRewardItem('nutrients', reward.nutrients)}
@@ -124,7 +130,7 @@ const RewardMap: React.FC = () => {
         {reward.love > 0 && renderRewardItem('love', reward.love)}
       </div>
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-1 text-yellow-600">
+        <div className="flex items-center gap-2 text-yellow-600">
           <Zap className="w-4 h-4" />
           <span className="text-sm font-medium">{reward.xp} XP</span>
         </div>
@@ -174,10 +180,10 @@ const RewardMap: React.FC = () => {
 
           <TabsContent value="lessons" className="space-y-6">
             {lessonRewards.map((category) => (
-              <div key={category.category} className={`p-4 rounded-lg border ${category.color}`}>
-                <div className="flex items-center space-x-2 mb-4">
-                  <span className="text-2xl">{category.icon}</span>
-                  <h3 className="text-xl font-bold">{category.category}</h3>
+              <div key={category.category} className={`p-6 rounded-lg border border-gray-100 bg-white/90`}>
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">{category.icon}</div>
+                  <h3 className="text-xl font-bold text-slate-900">{category.category}</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {category.rewards.map((reward) => renderRewardCard(reward, true))}

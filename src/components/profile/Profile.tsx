@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useProfile } from '@/hooks/useProfile';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -9,6 +9,7 @@ import { Progress } from '@/components/ui/progress';
 import { Search, Plus, UserPlus, ChevronRight, Edit3, Save, X } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import CreatePost from '@/components/community/CreatePost';
+import { useNavigate } from 'react-router-dom';
 
 const StatPill: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   <div className="flex flex-col items-center justify-center rounded-2xl bg-white/90 shadow-sm px-6 py-4">
@@ -48,9 +49,52 @@ const Profile: React.FC = () => {
   // Edit state
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(profile?.full_name || '');
-  const [showAvatarPicker, setShowAvatarPicker] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(profile?.pokemon_avatar || null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const navigate = useNavigate();
+
+  // Cover / upload state
+  const [localCoverUrl, setLocalCoverUrl] = useState<string | undefined>(undefined);
+  const [uploading, setUploading] = useState(false);
+
+  // Sync local edit state when profile changes
+  useEffect(() => {
+    setEditName(profile?.full_name || '');
+    setSelectedAvatar(profile?.pokemon_avatar || null);
+  }, [profile]);
+
+  const handleEditClick = () => {
+    setEditName(profile?.full_name || '');
+    setSelectedAvatar(profile?.pokemon_avatar || null);
+    setIsEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setEditName(profile?.full_name || '');
+    setSelectedAvatar(profile?.pokemon_avatar || null);
+  };
+
+  const handleSaveProfile = async () => {
+    if (!profile) return;
+    setIsUpdating(true);
+    try {
+      const updates: any = { full_name: editName };
+      if (selectedAvatar) updates.pokemon_avatar = selectedAvatar;
+      const res = await updateProfile(updates);
+      if ((res as any)?.error) {
+        toast({ title: 'Failed to update profile', variant: 'destructive' });
+      } else {
+        toast({ title: 'Profile updated' });
+        setIsEditing(false);
+      }
+    } catch (err) {
+      console.error('Error saving profile:', err);
+      toast({ title: 'Failed to update profile', variant: 'destructive' });
+    } finally {
+      setIsUpdating(false);
+    }
+  };
 
   const handleCoverChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -82,21 +126,12 @@ const Profile: React.FC = () => {
       // Keep local preview even if upload fails
       toast({ title: 'Preview set locally', description: 'Upload failed, but preview works.', variant: 'destructive' });
     } finally {
-      setIsUpdating(false);
+      setUploading(false);
     }
   };
 
   const handleAvatarSelect = (avatarUrl: string) => {
     setSelectedAvatar(avatarUrl);
-  };
-
-  const handleAvatarConfirm = () => {
-    setShowAvatarPicker(false);
-  };
-
-  const handleAvatarSkip = () => {
-    setSelectedAvatar(null);
-    setShowAvatarPicker(false);
   };
 
   return (
@@ -122,7 +157,7 @@ const Profile: React.FC = () => {
                         </div>
                       )}
                       <button
-                        onClick={() => setShowAvatarPicker(true)}
+                        onClick={() => navigate('/profile/avatar')}
                         className="absolute -bottom-1 -right-1 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-blue-600 transition-colors"
                       >
                         ✏️
@@ -371,32 +406,6 @@ const Profile: React.FC = () => {
         </div>
       </div>
 
-      {/* Pokemon Avatar Picker Modal */}
-      {showAvatarPicker && (
-        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between rounded-t-2xl">
-              <h2 className="text-xl font-semibold">Choose Your Pokemon Avatar</h2>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowAvatarPicker(false)}
-                className="rounded-full"
-              >
-                ✕
-              </Button>
-            </div>
-            <div className="p-6">
-              <PokemonAvatarPicker
-                selected={selectedAvatar}
-                onSelect={handleAvatarSelect}
-                onConfirm={handleAvatarConfirm}
-                onSkip={handleAvatarSkip}
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
