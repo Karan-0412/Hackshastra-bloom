@@ -56,28 +56,30 @@ export default function LessonModule({ module, onStartLesson }: LessonModuleProp
   };
 
   return (
-    <Card className="bg-white border-blue-200 hover:shadow-lg transition-shadow">
+    <Card className="rounded-2xl border border-gray-100 bg-gradient-to-br from-white/60 to-white/40 shadow-sm hover:shadow-xl transform-gpu transition-all duration-200 hover:-translate-y-1">
       <CardHeader>
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className={`w-12 h-12 rounded-lg flex items-center justify-center text-2xl ${
-              module.color === 'red' ? 'bg-red-100' :
-              module.color === 'green' ? 'bg-green-100' :
-              module.color === 'yellow' ? 'bg-yellow-100' :
-              module.color === 'blue' ? 'bg-blue-100' :
-              'bg-gray-100'
+          <div className="flex items-center space-x-4">
+            <div className={`w-14 h-14 rounded-xl flex items-center justify-center text-2xl shadow-inner ${
+              module.color === 'red' ? 'bg-red-50' :
+              module.color === 'green' ? 'bg-green-50' :
+              module.color === 'yellow' ? 'bg-yellow-50' :
+              module.color === 'blue' ? 'bg-blue-50' :
+              'bg-gray-50'
             }`}>
               {module.icon}
             </div>
             <div>
-              <CardTitle className="text-xl text-blue-900">{module.title}</CardTitle>
-              <p className="text-blue-600 text-sm">{module.description}</p>
+              <CardTitle className="text-lg md:text-xl font-semibold text-slate-900">{module.title}</CardTitle>
+              <p className="text-sm text-muted-foreground">{module.description}</p>
             </div>
           </div>
+
           <Button
             variant="outline"
             size="sm"
             onClick={() => setExpanded(!expanded)}
+            className="border-gray-200 bg-white/50 hover:bg-white flex items-center gap-2"
           >
             {expanded ? 'Hide Lessons' : 'Show Lessons'}
           </Button>
@@ -85,14 +87,14 @@ export default function LessonModule({ module, onStartLesson }: LessonModuleProp
         
         <div className="mt-4">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm font-medium text-blue-700">Progress</span>
-            <span className="text-sm text-blue-600">
+            <span className="text-sm font-medium text-slate-700">Progress</span>
+            <span className="text-sm text-slate-500">
               {updatedModule?.completedLessons || 0}/{updatedModule?.totalLessons || 0} lessons
             </span>
           </div>
           <Progress 
             value={updatedModule?.progress || 0} 
-            className="h-3"
+            className="h-3 bg-slate-100 rounded-full"
           />
         </div>
       </CardHeader>
@@ -108,29 +110,29 @@ export default function LessonModule({ module, onStartLesson }: LessonModuleProp
               return (
                 <div
                   key={lesson.id}
-                  className={`p-6 rounded-2xl border transition-all ${
+                  className={`p-4 md:p-6 rounded-2xl border shadow-sm transition-transform duration-150 ${
                     isCompleted
-                      ? 'bg-green-50 border-green-200'
+                      ? 'bg-gradient-to-r from-emerald-50 to-white border-emerald-100 ring-1 ring-emerald-100' 
                       : isLocked
-                        ? 'bg-gray-50 border-gray-200 opacity-70'
-                        : 'bg-blue-50 border-blue-200 hover:bg-blue-100'
+                        ? 'bg-gray-50 border-gray-200 opacity-70' 
+                        : 'bg-white border-gray-100 hover:shadow-md hover:scale-[1.01]'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                         isCompleted 
                           ? 'bg-green-500 text-white' 
                           : isLocked 
                             ? 'bg-gray-300 text-gray-500' 
-                            : 'bg-blue-500 text-white'
+                            : 'bg-primary text-white'
                       }`}>
                         {isCompleted ? (
                           <CheckCircle className="w-4 h-4" />
                         ) : isLocked ? (
                           <Lock className="w-4 h-4" />
                         ) : (
-                          <span className="text-sm font-bold">{index + 1}</span>
+                          <span className="text-sm font-semibold">{index + 1}</span>
                         )}
                       </div>
                       
@@ -138,33 +140,33 @@ export default function LessonModule({ module, onStartLesson }: LessonModuleProp
                         <div className="flex items-center space-x-2 mb-1">
                           <h4 className={`font-semibold ${
                             isCompleted ? 'text-green-800' : 
-                            isLocked ? 'text-gray-500' : 'text-blue-900'
-                          }`}>
+                            isLocked ? 'text-gray-500' : 'text-slate-900'
+                          }`}> 
                             {lesson.title}
                           </h4>
                           {getLessonTypeIcon(lesson.type)}
                         </div>
                         <p className={`text-sm ${
                           isCompleted ? 'text-green-600' : 
-                          isLocked ? 'text-gray-400' : 'text-blue-600'
+                          isLocked ? 'text-gray-400' : 'text-slate-600'
                         }`}>
                           {lesson.description}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-3">
                       <div className="text-right">
                         <div className="flex items-center space-x-2 mb-1">
                           <Badge className={getDifficultyColor(lesson.difficulty)}>
                             {lesson.difficulty}
                           </Badge>
-                          <div className="flex items-center text-xs text-gray-500">
+                          <div className="flex items-center text-xs text-slate-500">
                             <Clock className="w-3 h-3 mr-1" />
                             {lesson.duration}min
                           </div>
                         </div>
-                        <div className="flex items-center text-xs text-blue-600">
+                        <div className="flex items-center text-xs text-slate-600">
                           <Star className="w-3 h-3 mr-1" />
                           {lesson.points} pts
                         </div>
@@ -174,14 +176,13 @@ export default function LessonModule({ module, onStartLesson }: LessonModuleProp
                         size="sm"
                         onClick={() => handleStartLesson(lesson)}
                         disabled={isLocked || isCompleted}
-                        className={
+                        className={`ml-2 ${
                           isCompleted 
-                            ? 'bg-green-100 text-green-800 cursor-not-allowed' 
+                            ? 'bg-emerald-100 text-emerald-800 cursor-not-allowed' 
                             : isLocked 
                               ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                              : 'bg-blue-600 hover:bg-blue-700'
-                        }
-                      >
+                              : 'bg-primary hover:bg-primary/90 text-white'
+                        }`}>
                         {isCompleted ? (
                           <>
                             <CheckCircle className="w-4 h-4 mr-1" />
@@ -203,7 +204,7 @@ export default function LessonModule({ module, onStartLesson }: LessonModuleProp
                   </div>
 
                   {isLocked && lesson.prerequisites.length > 0 && (
-                    <div className="mt-3 p-2 bg-yellow-50 border border-yellow-200 rounded">
+                    <div className="mt-3 p-3 bg-yellow-50 border border-yellow-100 rounded-lg">
                       <p className="text-xs text-yellow-800">
                         <strong>Prerequisites:</strong> Complete previous lessons to unlock this lesson.
                       </p>
@@ -211,8 +212,8 @@ export default function LessonModule({ module, onStartLesson }: LessonModuleProp
                   )}
 
                   {isCompleted && (
-                    <div className="mt-3 p-2 bg-green-50 border border-green-200 rounded">
-                      <p className="text-xs text-green-800">
+                    <div className="mt-3 p-3 bg-emerald-50 border border-emerald-100 rounded-lg">
+                      <p className="text-xs text-emerald-800">
                         <strong>Completed!</strong> Great job on finishing this lesson.
                       </p>
                     </div>
