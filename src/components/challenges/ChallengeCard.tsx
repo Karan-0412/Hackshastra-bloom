@@ -72,29 +72,27 @@ export default function ChallengeCard({ challenge, onStart, onComplete, userLeve
   const isComingSoon = challenge.tags.includes('coming-soon');
 
   return (
-    <Card className={`relative overflow-hidden transition-all duration-300 hover:shadow-lg ${
-      challenge.isLocked ? 'opacity-60' : 'hover:scale-105'
+    <Card className={`relative p-4 rounded-2xl border bg-white/90 transition-transform transform-gpu duration-200 ${
+      challenge.isLocked ? 'opacity-70' : 'hover:-translate-y-1 hover:shadow-lg'
     } ${challenge.isCompleted ? 'ring-2 ring-green-500' : ''} ${isComingSoon ? 'ring-2 ring-yellow-300' : ''}`}>
       {challenge.isCompleted && (
-        <div className="absolute top-2 right-2 z-10">
-          <Trophy className="w-6 h-6 text-green-500" />
+        <div className="absolute top-3 right-3 z-10">
+          <Trophy className="w-6 h-6 text-green-600" />
         </div>
       )}
       {isComingSoon && (
-        <div className="absolute top-2 left-2 z-10">
-          <Badge className="bg-yellow-100 text-yellow-800 text-xs">
-            Coming Soon
-          </Badge>
+        <div className="absolute top-3 left-3 z-10">
+          <Badge variant="secondary" className="text-xs">Coming Soon</Badge>
         </div>
       )}
-      
-      <CardHeader className="pb-3">
+
+      <CardHeader className="pb-2">
         <div className="flex items-start justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">{getCategoryIcon(challenge.category)}</span>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary text-lg">{getCategoryIcon(challenge.category)}</div>
             <div>
-              <CardTitle className="text-lg font-semibold">{challenge.title}</CardTitle>
-              <CardDescription className="text-sm text-gray-600">
+              <CardTitle className="text-lg font-semibold text-slate-900">{challenge.title}</CardTitle>
+              <CardDescription className="text-sm text-muted-foreground">
                 {challenge.description}
               </CardDescription>
             </div>
@@ -103,63 +101,63 @@ export default function ChallengeCard({ challenge, onStart, onComplete, userLeve
             <Lock className="w-5 h-5 text-gray-400" />
           )}
         </div>
-        
-        <div className="flex flex-wrap gap-2 mt-2">
-          <Badge className={getTypeColor(challenge.type)}>
+
+        <div className="flex flex-wrap gap-2 mt-3">
+          <Badge className={`text-xs py-1 px-2 ${getTypeColor(challenge.type)}`}>
             {challenge.type}
           </Badge>
-          <Badge className={getDifficultyColor(challenge.difficulty)}>
+          <Badge className={`text-xs py-1 px-2 ${getDifficultyColor(challenge.difficulty)}`}>
             {challenge.difficulty}
           </Badge>
-          <Badge variant="outline" className="flex items-center gap-1">
+          <Badge variant="outline" className="flex items-center gap-1 text-xs py-1 px-2">
             <Star className="w-3 h-3" />
             {challenge.points} pts
           </Badge>
         </div>
       </CardHeader>
 
-      <CardContent className="pt-0">
-        <div className="space-y-3">
+      <CardContent className="pt-2">
+        <div className="space-y-4">
           {/* Progress Bar */}
           {challenge.progress !== undefined && challenge.maxProgress && (
-            <div className="space-y-1">
-              <div className="flex justify-between text-sm">
+            <div className="space-y-2">
+              <div className="flex justify-between text-sm text-slate-700">
                 <span>Progress</span>
                 <span>{challenge.progress}/{challenge.maxProgress}</span>
               </div>
-              <Progress 
-                value={(challenge.progress / challenge.maxProgress) * 100} 
-                className="h-2"
+              <Progress
+                value={(challenge.progress / challenge.maxProgress) * 100}
+                className="h-2 rounded-full"
               />
             </div>
           )}
 
           {/* Tree Rewards */}
-          <div className="flex items-center gap-2 text-sm">
-            <span className="font-medium">Tree Rewards:</span>
+          <div className="flex items-center gap-3 text-sm">
+            <span className="font-medium text-slate-800">Tree Rewards:</span>
             <span className="text-green-600">{getTreeRewardsText()}</span>
           </div>
 
           {/* Verification Method */}
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             {getVerificationIcon(challenge.verificationMethod)}
             <span>Verify by {challenge.verificationMethod}</span>
-            <Clock className="w-4 h-4 ml-auto" />
-            <span>{challenge.estimatedTime}</span>
+            <Clock className="w-4 h-4 ml-auto text-slate-400" />
+            <span className="text-slate-500">{challenge.estimatedTime}</span>
           </div>
 
           {/* Instructions Preview */}
-          <div className="space-y-1">
-            <span className="text-sm font-medium">Instructions:</span>
-            <ul className="text-xs text-gray-600 space-y-1">
+          <div className="space-y-2">
+            <span className="text-sm font-medium text-slate-800">Instructions:</span>
+            <ul className="text-sm text-slate-600 space-y-2">
               {challenge.instructions.slice(0, 2).map((instruction, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">•</span>
+                <li key={index} className="flex items-start gap-3">
+                  <span className="text-primary mt-1">•</span>
                   <span>{instruction}</span>
                 </li>
               ))}
               {challenge.instructions.length > 2 && (
-                <li className="text-blue-500 text-xs">
+                <li className="text-primary text-sm">
                   +{challenge.instructions.length - 2} more steps
                 </li>
               )}
@@ -167,11 +165,9 @@ export default function ChallengeCard({ challenge, onStart, onComplete, userLeve
           </div>
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-1">
+          <div className="flex flex-wrap gap-2">
             {challenge.tags.slice(0, 3).map((tag, index) => (
-              <Badge key={index} variant="secondary" className="text-xs">
-                #{tag}
-              </Badge>
+              <Badge key={index} variant="secondary" className="text-xs py-1 px-2">#{tag}</Badge>
             ))}
           </div>
 
@@ -188,14 +184,14 @@ export default function ChallengeCard({ challenge, onStart, onComplete, userLeve
                 Coming Soon
               </Button>
             ) : challenge.isLocked ? (
-              <Button disabled className="w-full">
+              <Button disabled className="w-full bg-gray-100 text-gray-400">
                 <Lock className="w-4 h-4 mr-2" />
                 Locked
               </Button>
             ) : (
-              <Button 
+              <Button
                 onClick={() => onStart(challenge.id)}
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full bg-primary text-primary-foreground hover:opacity-95"
               >
                 <Play className="w-4 h-4 mr-2" />
                 Start Challenge
