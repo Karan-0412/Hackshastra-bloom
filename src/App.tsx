@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import AvatarPickerPage from '@/pages/AvatarPickerPage';
 import { CommunityProvider } from "./contexts/CommunityContext";
+import { ToastProvider } from './contexts/ToastContext';
 
 const queryClient = new QueryClient();
 
