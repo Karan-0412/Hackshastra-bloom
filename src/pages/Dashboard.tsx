@@ -634,7 +634,7 @@ const Dashboard: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main className="px-2 py-6 pt-24">
+      <main className="px-6 py-8 pt-28">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsContent value="dashboard" className="mt-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
